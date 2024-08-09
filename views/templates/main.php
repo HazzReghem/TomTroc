@@ -25,8 +25,8 @@
             </nav>
 
             <nav class="userNav">
-                <li class="userInfo"><i class="fa-regular fa-comment"></i>Messagerie</li>
-                <li class="userInfo"><i class="fa-regular fa-user"></i>Mon compte</li>
+                <li><i class="fa-regular fa-comment"></i>Messagerie</li>
+                <li><i class="fa-regular fa-user"></i>Mon compte</li>
                 <li>Connexion</li>
             </nav>
         </div>
