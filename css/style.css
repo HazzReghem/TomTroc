@@ -1,8 +1,48 @@
 * {
     font-family: "Inter", sans-serif;
+    background-color: #F5F3EF;
 }
 
+a{
+    text-decoration: none;
+}
+
+a:active{
+    font-weight: 600;
+}
+
+h1{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 48px;
+}
+
+h2{
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-size: 32px;
+}
+
+p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+}
 /* --------------HEADER------------------*/
+
+header{
+    margin-bottom: 80px;
+}
+
+header a{
+    text-decoration: none;
+    color: black;
+}
+
+header a:hover{
+    font-weight: 600;
+}
 
 .headerContainer{
     display: flex;
@@ -11,11 +51,6 @@
     font-size: 14px;
     margin: 0 150px 0 150px;
     align-items: center;
-}
-
-.headerContainer li:hover{
-    font-weight: 600;
-    cursor: pointer;
 }
 
 .navContainer{
@@ -27,11 +62,8 @@
 .mainNav{
     list-style-type: none;
     display: flex;
-    min-width: 301px;
-}
-
-.mainNav li{
-    margin-right: 40px;
+    min-width: 25%;
+    justify-content: space-between;
 }
 
 .userNav{
@@ -77,4 +109,49 @@
 
 .footer li{
     margin-left: 40px;
+}
+
+/* -------------HOMEPAGE------------ */
+
+.discoverContainer .submit{
+    display: inline-block;
+    padding: 22px 38px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    background-color: #00AC66;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-top: 40px;
+    transition: background-color 0.5s ease-out;
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -ms-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+}
+
+.discoverContainer .submit:hover{
+    background-color: #006D41;
+    
+}
+
+section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#discover img{
+    width: 405px;
+    height: 540px;
+}
+
+.discoverContainer{
+    width: 25%;
+    margin-right: 110px;
 }
