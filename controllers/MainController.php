@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../views/View.php';
+// require_once __DIR__ . '/../views/View.php';
 
 class MainController
 {
