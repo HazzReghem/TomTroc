@@ -16,6 +16,6 @@ try {
         throw new Exception("La page demandée n'existe pas.");
     }
 } catch (Exception $e) {
-    http_response_code($e->getCode());
+    // http_response_code($e->getCode());
     echo "Erreur : " . $e->getMessage();
 }

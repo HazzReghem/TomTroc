@@ -4,13 +4,18 @@
 
 class MainController
 {
-    /**
-     * Affiche la page d'accueil.
-     * @return void
-     */
+    private $bookModel;
+
+    public function __construct()
+    {
+        $db = new PDO('mysql:host=localhost;dbname=tom_troc', 'root', '');
+        $this->bookModel = new BookModel($db);
+    }
+
     public function showHome() : void
     {
+        $lastBooks = $this->bookModel->getLastBooks();
         $view = new View("Accueil");
-        $view->render("home", ['message' => 'Bienvenue sur la page d\'accueil !']);
+        $view->render("home", ['lastBooks' => $lastBooks]);
     }
 }
