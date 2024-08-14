@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/config/autoload.php';
-// require_once __DIR__ . '/controllers/MainController.php';
 
 $action = $_GET['action'] ?? 'home';
 
@@ -12,8 +11,17 @@ try {
             $mainController = new MainController();
             $mainController->showHome();
             break;
+        
+        case 'books':
+            $bookController = new BookController();
+            $bookController->showBooks();
+            break;    
+            
         default:
-        throw new Exception("La page demandée n'existe pas.");
+        // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
+        Utils::redirect('home');
+        break;
+        // throw new Exception("La page demandée n'existe pas.");
     }
 } catch (Exception $e) {
     // http_response_code($e->getCode());

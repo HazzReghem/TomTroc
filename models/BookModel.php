@@ -9,11 +9,23 @@ class BookModel
         $this->db = $db;
     }
 
+    // RECUPERATION DES 4 DERNIERS LIVRES A AFFICHER 
     public function getLastBooks(int $limit = 4)
     {
-        $stmt = $this->db->prepare("SELECT * FROM book ORDER BY date_creation DESC LIMIT :limit");
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare("SELECT * FROM book ORDER BY date_creation DESC LIMIT :limit");
+        $query->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function getAvailableBooks() : array
+    {
+        // Requête SQL pour récupérer les livres disponibles à l'échange
+        $query = $this->db->prepare("SELECT * FROM book WHERE availability_status = 'disponible'");
+        $query->execute();
+
+        // Renvoyer les résultats sous forme de tableau associatif
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 }

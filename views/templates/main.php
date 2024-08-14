@@ -1,3 +1,8 @@
+<?php
+$activePage = $activePage ?? '';
+var_dump($activePage); 
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -16,19 +21,23 @@
 <header>
     <div class="headerContainer">
         <div class="headerLogo">
-            <a href="#"><img src="./css/assets/logo_header.png" alt=""></a>
+            <a href="index.php?action=home"><img src="./css/assets/logo_header.png" alt=""></a>
         </div>
 
         <div class="navContainer">
-            <nav class="mainNav">
-                <a href="#"><li>Accueil</li></a>
-                <a href="#"><li>Nos livres à l'échange</li></a>
+            <nav id="nav1">
+                <ul class="mainNav">
+                    <a href="index.php?action=home" class="<?= $activePage === 'home' ? 'active' : '' ?>"><li>Accueil</li></a>
+                    <a href="index.php?action=books" class="<?= $activePage === 'books' ? 'active' : '' ?>"><li>Nos livres à l'échange</li></a>
+                </ul>
             </nav>
 
-            <nav class="userNav">
-            <a href="#"><li><i class="fa-regular fa-comment"></i>Messagerie</li></a>
-            <a href="#"><li><i class="fa-regular fa-user"></i>Mon compte</li></a>
-            <a href="#"><li>Connexion</li></a>
+            <nav id="nav2">
+                <ul class="userNav">
+                    <a href="#"><li><i class="fa-regular fa-comment"></i>Messagerie</li></a>
+                    <a href="#"><li><i class="fa-regular fa-user"></i>Mon compte</li></a>
+                    <a href="#"><li>Connexion</li></a>
+                </ul>
             </nav>
         </div>
     </div>

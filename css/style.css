@@ -93,6 +93,10 @@ section {
     background-color: #006D41; 
     color: white;
 }
+
+.active{
+    font-weight: 600;
+}
 /* --------------HEADER------------------*/
 
 header{
@@ -123,17 +127,25 @@ header a:hover{
     justify-content: space-between;
 }
 
+#nav1{
+    width: 25%;
+}
+
 .mainNav{
+    padding: 0;
     list-style-type: none;
     display: flex;
-    min-width: 25%;
     justify-content: space-between;
 }
 
+#nav2{
+    width: 45%;
+}
+
 .userNav{
+    padding: 0;
     list-style-type: none;
     display: flex;
-    width: 45%;
     justify-content: space-between;
 }
 
@@ -314,4 +326,22 @@ footer{
     position: relative;
     bottom: 50px;
     left: 200px;
+}
+
+/*--------------------------LIVRES DISPO---------------------  */
+
+#availableBooks-section{
+    flex-direction: column;
+}
+
+.availableBooks{
+    display: flex;
+    width: 65%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.BookCard-library{
+    margin-bottom: 50px;
 }

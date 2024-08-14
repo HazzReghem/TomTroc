@@ -1,7 +1,5 @@
 <?php
 
-// require_once __DIR__ . '/../views/View.php';
-
 class MainController
 {
     private $bookModel;
@@ -16,6 +14,9 @@ class MainController
     {
         $lastBooks = $this->bookModel->getLastBooks();
         $view = new View("Accueil");
-        $view->render("home", ['lastBooks' => $lastBooks]);
+        $view->render("home", [
+            'lastBooks' => $lastBooks,
+            'activePage' => 'home'
+        ]);
     }
 }
