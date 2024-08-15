@@ -1,4 +1,5 @@
 <!-- TEMPLATE DE LA PAGE DE LIVRES DISPONIBLES -->
+ 
 
 <section id="availableBooks-section" arialabelledby="availableBooks-section-title">
 

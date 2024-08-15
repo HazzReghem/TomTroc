@@ -1,6 +1,5 @@
 <?php
 $activePage = $activePage ?? '';
-var_dump($activePage); 
 ?>
 
 <!DOCTYPE html>

@@ -30,13 +30,18 @@ class View
         // On s'occupe de la vue envoyée
         $viewPath = $this->buildViewPath($viewName);
         
+        // Extraire les paramètres pour les rendre disponibles dans le template principal
+        extract($params);
+
         // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le template principal.
         $content = $this->_renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
+
         ob_start();
-        require(MAIN_VIEW_PATH);
+        require(MAIN_VIEW_PATH);  // Assure-toi que `MAIN_VIEW_PATH` pointe bien vers `main.php`
         echo ob_get_clean();
     }
+    
     
     /**
      * Coeur de la classe, c'est ici qu'est généré ce que le controlleur a demandé. 
