@@ -2,8 +2,15 @@
  
 
 <section id="availableBooks-section" arialabelledby="availableBooks-section-title">
+    
+    <div class="topContainer">
+        <h1 id="availableBooks-section-title">Nos livres disponibles à l'échange</h1>
 
-    <h1 id="availableBooks-section-title">Nos livres disponibles à l'échange</h1>
+        <form method="GET" action="index.php?action=books">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="search" size="15" placeholder="Rechercher un livre..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+        </form>
+    </div>
 
     <?php if (!empty($books)): ?>
 
