@@ -19,6 +19,8 @@
     <div class="lastBooks">
         <?php foreach ($lastBooks as $book): ?>
             <article class="bookCard">
+                
+                <!-- Asset/image.concatenation -->
                 <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
 
                 <h3><?= htmlspecialchars($book['title']) ?></h3>
@@ -29,7 +31,7 @@
         <?php endforeach; ?>
     </div>
 
-    <a href="#" class="submit">Voir tous les livres</a>
+    <a href="index.php?action=books" class="submit">Voir tous les livres</a>
 </section>
 
 <section id="how-to-section" arialabelledby="how-to-section-title">

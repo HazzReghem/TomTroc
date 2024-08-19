@@ -4,7 +4,7 @@
 <section id="availableBooks-section" arialabelledby="availableBooks-section-title">
     
     <div class="topContainer">
-        <h1 id="availableBooks-section-title">Nos livres disponibles à l'échange</h1>
+        <h1 id="availableBooks-section-title">Nos livres à l'échange</h1>
 
         <form method="GET" action="index.php?action=books">
             <i class="fa-solid fa-magnifying-glass"></i>
