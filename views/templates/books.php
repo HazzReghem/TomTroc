@@ -8,7 +8,13 @@
 
         <form method="GET" action="index.php?action=books">
             <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="hidden" name="action" value="searchBooks">
             <input type="text" name="search" size="15" placeholder="Rechercher un livre..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+            <datalist id="book-titles">
+                <?php foreach ($titles as $title): ?>
+                    <option value="<?= htmlspecialchars($title) ?>">
+                <?php endforeach; ?>
+            </datalist>
         </form>
     </div>
 
@@ -17,6 +23,8 @@
         <div class="availableBooks">
             <?php foreach ($books as $book): ?>
             
+                <a href="index.php?action=bookDetails&id=<?= htmlspecialchars($book['id']) ?>">
+
                 <article class="bookCard BookCard-library">
                     <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
 
@@ -30,6 +38,6 @@
         </div>
 
     <?php else: ?>
-        <p>Aucun livre disponible à l'échange pour le moment.</p>
+        <p>Aucun livre ne correspond à votre recherche.</p>
     <?php endif; ?>
 </section>

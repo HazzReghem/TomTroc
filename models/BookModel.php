@@ -30,15 +30,33 @@ class BookModel
     }
 
     // METHODE FORMULAIRE RECHERCHE
-    public function searchBooks(string $searchTerm) : array
+    public function searchBooks(string $query) : array
     {
-        // Requête SQL pour rechercher les livres disponibles avec un titre correspondant au terme de recherche
-        $query = $this->db->prepare("SELECT * FROM book WHERE availability_status = 'disponible' AND title LIKE :searchTerm");
-        $query->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $query = "%" . $query . "%";
+        $stmt = $this->db->prepare("SELECT * FROM book WHERE title LIKE :query OR author LIKE :query");
+        $stmt->bindValue(':query', $query, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllBookTitles(): array
+    {
+        $query = $this->db->prepare("SELECT title FROM book WHERE availability_status = 'disponible'");
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+
+
+    public function getBookDetails(int $id) : array
+    {
+        // Requête SQL pour récupérer les détails du livre par son ID
+        $query = $this->db->prepare("SELECT * FROM book WHERE id = :id");
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
-        // Renvoyer les résultats sous forme de tableau associatif
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        // Retourner le résultat sous forme de tableau associatif
+        return $query->fetch(PDO::FETCH_ASSOC);
     }
 
 }

@@ -15,7 +15,17 @@ try {
         case 'books':
             $bookController = new BookController();
             $bookController->showBooks();
+            break;  
+            
+        case 'bookDetails':
+            $bookcontroller = new BookController();
+            $bookcontroller->showBookDetails();
             break;    
+        
+        case 'searchBooks':
+            $controller = new BookController();
+            $controller->searchBooks();
+            break;
             
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
