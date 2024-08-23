@@ -3,6 +3,7 @@
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/config/autoload.php';
 
+
 $action = $_GET['action'] ?? 'home';
 
 try {
@@ -23,8 +24,33 @@ try {
             break;    
         
         case 'searchBooks':
-            $controller = new BookController();
-            $controller->searchBooks();
+            $bookcontroller = new BookController();
+            $bookcontroller->searchBooks();
+            break;
+         
+        case 'register':
+            $userController = new UserController();
+            $userController->showRegisterForm();
+            break;
+
+        case 'registerUser':
+            $userController = new UserController();
+            $userController->registerUser();
+            break;
+
+        case 'login':
+            $userController = new UserController();
+            $userController->showLoginForm();
+            break;
+
+        case 'loginUser':
+            $userController = new UserController();
+            $userController->loginUser();
+            break;
+
+        case 'logout':
+            $userController = new UserController();
+            $userController->logoutUser();
             break;
             
         default:
