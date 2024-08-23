@@ -25,15 +25,16 @@
             
                 <a href="index.php?action=bookDetails&id=<?= htmlspecialchars($book['id']) ?>">
 
-                <article class="bookCard BookCard-library">
-                    <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
+                    <article class="bookCard BookCard-library">
+                        <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
 
-                    <h3><?= htmlspecialchars($book['title']) ?></h3>
-                    <p><?= htmlspecialchars($book['author']) ?></p>
+                        <h3><?= htmlspecialchars($book['title']) ?></h3>
+                        <p><?= htmlspecialchars($book['author']) ?></p>
 
-                    <p class="soldBy">Vendu par : UTILISATEUR</p>
-                </article>
-
+                        <p class="soldBy">Vendu par : UTILISATEUR</p>
+                    </article>
+                    
+                </a>    
             <?php endforeach; ?>
         </div>
 

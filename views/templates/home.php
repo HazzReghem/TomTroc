@@ -18,16 +18,22 @@
 
     <div class="lastBooks">
         <?php foreach ($lastBooks as $book): ?>
-            <article class="bookCard">
+
+            <a href="index.php?action=bookDetails&id=<?= htmlspecialchars($book['id']) ?>">
+
+                <article class="bookCard">
+                    
+                    <!-- Asset/image.concatenation -->
+                    <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
+
+                    <h3><?= htmlspecialchars($book['title']) ?></h3>
+                    <p><?= htmlspecialchars($book['author']) ?></p>
+
+                    <p class="soldBy">Vendu par : UTILISATEUR</p>
                 
-                <!-- Asset/image.concatenation -->
-                <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
+                </article>
+            </a>
 
-                <h3><?= htmlspecialchars($book['title']) ?></h3>
-                <p><?= htmlspecialchars($book['author']) ?></p>
-
-                <p class="soldBy">Vendu par : UTILISATEUR</p>
-            </article>
         <?php endforeach; ?>
     </div>
 

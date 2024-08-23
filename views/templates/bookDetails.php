@@ -9,8 +9,13 @@
 
         <div class="bookInfo">
             <h1><?= htmlspecialchars($book['title']) ?></h1>
-            <p>par <?= htmlspecialchars($book['author']) ?></p>
-            <p>Description : <?= htmlspecialchars($book['description']) ?></p>
+            <p class="writtenBy">par <?= htmlspecialchars($book['author']) ?></p>
+            <p class="line">______</p>
+            <h4>description</h4>
+            <p class="description"><?= htmlspecialchars($book['description']) ?></p>
+            <h4>Propriétaire</h4>
+            <p class="owner">UTILISATEUR</p>
+            <a href="#" class="submit">Envoyer un message</a>
         </div>
     </div>
 
