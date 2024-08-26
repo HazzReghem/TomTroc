@@ -437,3 +437,67 @@ footer{
     width: 85%;
     margin: 80px 0;
 }
+
+/* ------------ PAGE LOGIN ------------- */
+
+#login-section{
+    margin-bottom: 0;
+    align-items: normal;
+}
+
+.login{
+    width: 50%;
+    margin-left: 150px;
+    margin-right: 250px;
+}
+
+.login h1{
+    margin-top: 130px;
+    margin-bottom: 55px;
+}
+
+.login form{
+    display: flex;
+    flex-direction: column;
+    color: #A6A6A6;
+    font-size: 14px;
+}
+
+.login input{
+    height: 50px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    outline: none;
+    padding: 0 20px;
+}
+
+.login label{
+    margin-bottom: 10px;
+}
+
+.login .submit{
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.login a{
+    color: black;
+    text-decoration: underline;
+}
+
+#login-section img{
+    width: 50%;
+    min-width: 50%;
+}
+
+/* -------- PAGE REGISTER -------- */
+#register-section{
+    margin-bottom: 0;
+    align-items: normal;
+}
+
+#register-section img{
+    width: 50%;
+    min-width: 50%;
+}

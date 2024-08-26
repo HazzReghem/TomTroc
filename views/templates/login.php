@@ -1,13 +1,23 @@
 <!-- TEMPLATE DE LA PAGE LOGIN -->
 
 <section id="login-section" arialabelledby="login-title">
-    <form action="index.php?action=loginUser" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" name="username" id="username" required>
-        
-        <label for="password">Mot de passe :</label>
-        <input type="password" name="password" id="password" required>
-        
-        <button type="submit" class="submit">Se connecter</button>
-    </form>
+    <div class="login register">
+
+        <h1>Connexion</h1>
+
+        <form action="index.php?action=loginUser" method="post">
+            <label for="email">Adresse mail</label>
+            <input type="text" name="email" id="email" required>
+            
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password" required>
+            
+            <button type="submit" class="submit">Se connecter</button>
+        </form>
+
+        <p>Pas de compte ? <a href="index.php?action=register">Inscrivez-vous</a></p>
+
+    </div>
+
+    <img src="./css/assets/books.png" alt="Photo de plusieurs livres">
 </section>

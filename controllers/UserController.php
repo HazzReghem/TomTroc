@@ -29,7 +29,7 @@ class UserController
             //     return;
             // }
 
-            // Hash du mdp avec Bcrypt
+            // Hash du mdp avec Bcryptx
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
             $stmt = $this->db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
@@ -55,17 +55,17 @@ class UserController
     public function loginUser(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
+            $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username");
-            $stmt->bindParam(':username', $username);
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->bindParam(':email', $email);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
+                $_SESSION['email'] = $user['email'];
                 Utils::redirect('home');
             } else {
                 echo "Nom d'utilisateur ou mot de passe incorrect.";
@@ -80,3 +80,5 @@ class UserController
         Utils::redirect('home');
     }
 }
+
+// Ajouter condition pas 2x la même adresse mail et/ou users
