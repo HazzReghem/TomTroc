@@ -39,7 +39,7 @@ $activePage = $activePage ?? '';
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <a href="index.php?action=logout">Déconnexion</a>
                     <?php else: ?>
-                        <a href="index.php?action=login">Connexion</a>
+                        <a href="index.php?action=login" class="<?= $activePage === 'login' ? 'active' : '' ?>">Connexion</a>
                         <a href="index.php?action=register">Inscription</a>
                     <?php endif; ?>
                 </ul>

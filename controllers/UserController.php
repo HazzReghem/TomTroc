@@ -13,7 +13,9 @@ class UserController
     public function showRegisterForm(): void
     {
         $view = new View("Inscription");
-        $view->render("register"); 
+        $view->render("register", [
+            'activePage' => 'register' 
+        ]); 
     }
 
     public function registerUser(): void
@@ -49,7 +51,9 @@ class UserController
     public function showLoginForm(): void
     {
         $view = new View("Connexion");
-        $view->render("login");
+        $view->render("login", [
+            'activePage' => 'login'
+        ]);
     }
 
     public function loginUser(): void
