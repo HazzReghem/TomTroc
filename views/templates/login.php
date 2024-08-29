@@ -3,7 +3,7 @@
 <section id="login-section" arialabelledby="login-title">
     <div class="login register">
 
-        <h1>Connexion</h1>
+        <h1 id="login-title">Connexion</h1>
 
         <form action="index.php?action=loginUser" method="post">
             <label for="email">Adresse mail</label>
