@@ -11,9 +11,9 @@ a{
     text-decoration: none;
 }
 
-a:active{
+/* a:active{
     font-weight: 600;
-}
+} */
 
 h1{
     font-family: "Playfair Display", serif;
@@ -345,6 +345,23 @@ footer{
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 50px;
+}
+
+.not-available-banner{
+    color: white;
+    font-size: 9px;
+    font-weight: 500;
+    padding: 3.7px 13.31px;
+    border: 1px solid #C56D6D;
+    border-radius: 29.5px;
+    -webkit-border-radius: 29.5px;
+    -moz-border-radius: 29.5px;
+    -ms-border-radius: 29.5px;
+    -o-border-radius: 29.5px;
+    background-color: #C56D6D;
+    position: relative;
+    bottom: 300px;
+    left: 110px;
 }
 
 

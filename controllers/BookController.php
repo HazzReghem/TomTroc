@@ -13,7 +13,7 @@ class BookController
     public function showBooks() : void
     {
         $titles = $this->bookModel->getAllBookTitles();
-        $books = $this->bookModel->getAvailableBooks();
+        $books = $this->bookModel->getAllBooks();
 
         $view = new View("Nos livres à l'échange");
         $view->render("books", [
@@ -73,11 +73,9 @@ class BookController
                     'activePage' => ''
                 ]);
             } else {
-                // Rediriger ou afficher un message d'erreur si le livre n'existe pas
                 echo "Livre non trouvé.";
             }
         } else {
-            // Rediriger ou afficher un message d'erreur si l'ID est manquant
             echo "ID de livre manquant.";
         }
     }

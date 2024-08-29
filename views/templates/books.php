@@ -29,9 +29,13 @@
                         <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
 
                         <h3><?= htmlspecialchars($book['title']) ?></h3>
-                        <p><?= htmlspecialchars($book['author']) ?></p>
+                        <p><?= htmlspecialchars($book['author']) ?></p>      
 
                         <p class="soldBy">Vendu par : UTILISATEUR</p>
+                        
+                        <?php if ($book['availability_status'] !== 'Disponible'): ?>
+                            <span class="not-available-banner">non dispo.</span>
+                        <?php endif; ?>
                     </article>
                     
                 </a>    

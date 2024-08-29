@@ -19,10 +19,9 @@ class BookModel
     }
 
 
-    public function getAvailableBooks() : array
+    public function getAllBooks() : array
     {
-        // Requête SQL pour récupérer les livres disponibles à l'échange
-        $query = $this->db->prepare("SELECT * FROM book WHERE availability_status = 'disponible'");
+        $query = $this->db->prepare("SELECT * FROM book");
         $query->execute();
 
         // Renvoyer les résultats sous forme de tableau associatif
@@ -50,12 +49,10 @@ class BookModel
 
     public function getBookDetails(int $id) : array
     {
-        // Requête SQL pour récupérer les détails du livre par son ID
         $query = $this->db->prepare("SELECT * FROM book WHERE id = :id");
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
-        // Retourner le résultat sous forme de tableau associatif
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 

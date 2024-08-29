@@ -23,8 +23,6 @@
 
                 <article class="bookCard">
                     
-                    <!-- Asset/image.concatenation -->
-                     <!-- <img src="./css/assets/" . <?= htmlspecialchars($book['image']) ?> . " /> -->
                     <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
 
                     <h3><?= htmlspecialchars($book['title']) ?></h3>
