@@ -40,7 +40,7 @@ $activePage = $activePage ?? '';
                         <a href="index.php?action=logout">Déconnexion</a>
                     <?php else: ?>
                         <a href="index.php?action=login" class="<?= $activePage === 'login' ? 'active' : '' ?>">Connexion</a>
-                        <a href="index.php?action=register">Inscription</a>
+                        <a href="index.php?action=register" class="<?= $activePage === 'register' ? 'active' : '' ?>">Inscription</a>
                     <?php endif; ?>
                 </ul>
             </nav>
