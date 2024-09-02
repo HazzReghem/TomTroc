@@ -559,6 +559,11 @@ footer{
 .userInfo{
     width: 50%;
     background: white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .userPicture{
@@ -566,8 +571,15 @@ footer{
 }
 .userInfo{
     margin-left: 15px;
-    padding: 35px 115px;
+    /* padding: 35px 115px; */
     font-size: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.userInfo form{
+    width: 60%;
+    margin: 35px 0;
 }
 
 .userInfo input{
