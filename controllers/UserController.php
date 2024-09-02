@@ -71,7 +71,7 @@ class UserController
 
     public function showAccount(): void
     {
-        $userId = $_SESSION['user_id'];  // Supposons que l'ID de l'utilisateur est stocké dans la session
+        $userId = $_SESSION['user_id']; 
         $user = $this->userModel->getUserById($userId);
         $userBooks = $this->getUserBooks($userId);
 
