@@ -52,6 +52,21 @@ try {
             $userController = new UserController();
             $userController->logoutUser();
             break;
+
+        case 'account':
+            $userController = new UserController();
+            $userController->showAccount();
+            break;
+    
+        case 'updateUserInfo':
+            $userController = new UserController();
+            $userController->updateUserInfo();
+            break;
+    
+        case 'updateProfilePicture':
+            $userController = new UserController();
+            $userController->updateProfilePicture();
+            break;    
             
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
