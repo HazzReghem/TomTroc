@@ -106,7 +106,7 @@ class UserController
             // Traitement du téléchargement du fichier
             $file = $_FILES['profile_picture'];
             $fileName = basename($file['name']);
-            $targetDir = "uploads/profile_pictures/";
+            $targetDir = "./css/user_pic/";
             $targetFile = $targetDir . uniqid() . "_" . $fileName;
 
             if (move_uploaded_file($file['tmp_name'], $targetFile)) {
