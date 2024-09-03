@@ -87,14 +87,20 @@ class UserController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = $_SESSION['user_id'];
-            $email = $_POST['email'];
             $username = $_POST['username'];
+            $email = $_POST['email'];
+            $newPassword = $_POST['password'];
 
-            if ($this->userModel->updateUserInfo($userId, $email, $username)) {
-                Utils::redirect('account');
+            // Vérifier si un nouveau mot de passe est fourni
+            if (!empty($newPassword)) {
+                $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+                $this->userModel->updateUserInfo($userId, $email, $username, $hashedPassword);
             } else {
-                echo "Erreur lors de la mise à jour des informations.";
+                $this->userModel->updateUserInfo($userId, $email, $username);
             }
+
+            echo "Informations mises à jour avec succès.";
+            Utils::redirect('account');
         }
     }
 
