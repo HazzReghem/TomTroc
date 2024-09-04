@@ -42,14 +42,43 @@
     </div>
 
     <!-- Liste des livres ajoutés par l'utilisateur -->
-    <?php if (!empty($userBooks)): ?>
-        <ul>
-            <?php foreach ($userBooks as $book): ?>
-                <li><?= htmlspecialchars($book['title']) ?> - <?= htmlspecialchars($book['author']) ?></li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>Vous n'avez pas encore ajouté de livres à l'échange.</p>
-    <?php endif; ?>
+    <div>
+        <table class="tableBooks">
+            <thead>
+                <tr>
+                    <th class="tableHead">
+                        PHOTO
+                    </th>
+                    <th class="tableHead">
+                        TITRE
+                    </th>
+                    <th class="tableHead">
+                        AUTEUR
+                    </th>
+                    <th class="tableHead">
+                        DESCRIPTION
+                    </th>
+                    <th class="tableHead">
+                        DISPONIBILITE
+                    </th>
+                    <th class="tableHead">
+                        ACTION
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($userBooks as $userBook) { ?>
+                    <tr>
+                        <td><img src="<?= htmlspecialchars($userBook['image']) ?>" alt="Couverture de <?= htmlspecialchars($userBook['title']) ?>"></td>
+                        <td><?= htmlspecialchars($userBook['title']) ?></td>
+                        <td><?= htmlspecialchars($userBook['author']) ?></td>
+                        <td><?= htmlspecialchars($userBook['description']) ?></td>
+                        <td><?= htmlspecialchars($userBook['availability_status']) ?></td>
+                        <td><?= htmlspecialchars($userBook['author']) ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 
 </section>
