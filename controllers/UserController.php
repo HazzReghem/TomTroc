@@ -73,7 +73,7 @@ class UserController
     {
         $userId = $_SESSION['user_id']; 
         $user = $this->userModel->getUserById($userId);
-        $userBooks = $this->getUserBooks($userId);
+        $userBooks = $this->userModel->getUserBooks($userId); 
 
         $view = new View("Mon compte");
         $view->render("account", [
@@ -123,16 +123,5 @@ class UserController
         }
     }
 
-    private function getUserBooks(int $userId): array
-    {
-        $stmt = $this->db->prepare("
-            SELECT book.* 
-            FROM book 
-            INNER JOIN user_books ON book.id = user_books.book_id 
-            WHERE user_books.user_id = :user_id
-        ");
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+
 }
