@@ -10,9 +10,16 @@ class BookModel
     }
 
     // RECUPERATION DES 4 DERNIERS LIVRES A AFFICHER 
-    public function getLastBooks(int $limit = 4)
+    public function getLastBooks(int $limit = 4): array
     {
-        $query = $this->db->prepare("SELECT * FROM book ORDER BY date_creation DESC LIMIT :limit");
+        $query = $this->db->prepare("
+            SELECT book.*, users.username 
+            FROM book
+            INNER JOIN user_books ON book.id = user_books.book_id
+            INNER JOIN users ON users.id = user_books.user_id
+            ORDER BY book.date_creation DESC 
+            LIMIT :limit
+        ");
         $query->bindValue(':limit', $limit, PDO::PARAM_INT);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +28,12 @@ class BookModel
 
     public function getAllBooks() : array
     {
-        $query = $this->db->prepare("SELECT * FROM book");
+        $query = $this->db->prepare("
+            SELECT book.*, users.username 
+            FROM book
+            INNER JOIN user_books ON book.id = user_books.book_id
+            INNER JOIN users ON users.id = user_books.user_id
+        ");
         $query->execute();
 
         // Renvoyer les résultats sous forme de tableau associatif

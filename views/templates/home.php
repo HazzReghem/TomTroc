@@ -28,7 +28,7 @@
                     <h3><?= htmlspecialchars($book['title']) ?></h3>
                     <p><?= htmlspecialchars($book['author']) ?></p>
 
-                    <p class="soldBy">Vendu par : UTILISATEUR</p>
+                    <p class="soldBy">Vendu par : <?php echo htmlspecialchars($book['username']); ?></p>
                 
                 </article>
             </a>

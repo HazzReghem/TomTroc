@@ -603,3 +603,9 @@ footer{
 .userInfo label{
     color: #A6A6A6;
 }
+
+.tableBooks img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
