@@ -26,7 +26,10 @@
                 <a href="index.php?action=bookDetails&id=<?= htmlspecialchars($book['id']) ?>">
 
                     <article class="bookCard BookCard-library">
-                        <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
+                        <?php 
+                            $imagePath = "css/assets/" . $book['image'];
+                            echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '">';    
+                        ?>
 
                         <h3><?= htmlspecialchars($book['title']) ?></h3>
                         <p><?= htmlspecialchars($book['author']) ?></p>      

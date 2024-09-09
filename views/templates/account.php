@@ -69,7 +69,12 @@
             <tbody>
                 <?php foreach ($userBooks as $userBook) { ?>
                     <tr>
-                        <td><img src="<?= htmlspecialchars($userBook['image']) ?>" alt="Couverture de <?= htmlspecialchars($userBook['title']) ?>"></td>
+                        <td>
+                        <?php 
+                            $imagePath = "css/assets/" . $userBook['image'];
+                            echo '<img src="' . $imagePath . '" alt="' . $userBook['title'] . '">';    
+                        ?>
+                        </td>
                         <td><?= htmlspecialchars($userBook['title']) ?></td>
                         <td><?= htmlspecialchars($userBook['author']) ?></td>
                         <td><?= htmlspecialchars($userBook['description']) ?></td>
