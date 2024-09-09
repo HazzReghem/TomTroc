@@ -97,6 +97,12 @@ section {
 .active{
     font-weight: 600;
 }
+
+.error-message{
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
 /* --------------HEADER------------------*/
 
 /* header{

@@ -31,8 +31,13 @@ class UserController
                 echo "Inscription réussie ! Vous pouvez maintenant vous connecter.";
                 Utils::redirect('login');
             } else {
-                echo "L'email ou le nom d'utilisateur est déjà utilisé ou erreur lors de l'inscription.";
+                $view = new View("Erreur");
+                $view->render("error", [
+                    'message' => "L'email ou le nom d'utilisateur est déjà utilisé. </br>
+                    <a href='index.php?action=register' class='submit'>Retour à la page d'inscription</a>"
+                ]);
             }
+            
         }
     }
 

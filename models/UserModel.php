@@ -21,6 +21,7 @@ class UserModel
 
         if ($existingUser) {
             return false;  // L'utilisateur existe déjà
+            Utils::redirect('register');
         }
 
         // Hash du mdp avec Bcrypt
