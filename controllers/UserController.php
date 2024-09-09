@@ -116,13 +116,16 @@ class UserController
 
             // Traitement du téléchargement du fichier
             $file = $_FILES['profile_picture'];
-            $fileName = basename($file['name']);
+            $fileName = uniqid() . "_" . basename($file['name']);  // Nom unique
             $targetDir = "./css/user_pic/";
-            $targetFile = $targetDir . uniqid() . "_" . $fileName;
+            $targetFile = $targetDir . $fileName;  // Chemin complet pour l'upload
 
+            // Déplacer l'image uploadée vers le répertoire cible
             if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                $this->userModel->updateProfilePicture($userId, $targetFile);
+                // Ne sauvegarder que le nom de fichier dans la base de données
+                $this->userModel->updateProfilePicture($userId, $fileName);
             }
+
 
             Utils::redirect('account');
         }

@@ -7,8 +7,13 @@
 
     <div class="userContainer">
         <!-- Formulaire de mise à jour de la photo de profil -->
-        <div class="userPicture">       
-            <img src="<?= htmlspecialchars($user['profile_picture']) ?>" alt="Photo de profil">
+        <div class="userPicture">    
+            <?php
+                $picturePath = "css/user_pic/" . $user['profile_picture'];
+                echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
+            ?>    
+        
+            <!-- <img src="<?= htmlspecialchars($user['profile_picture']) ?>" alt="Photo de profil"> -->
             
             <form action="index.php?action=updateProfilePicture" method="post" enctype="multipart/form-data">
                 
