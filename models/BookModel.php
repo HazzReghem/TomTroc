@@ -68,4 +68,15 @@ class BookModel
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function addBook(string $title, string $description, string $imagePath, int $userId): bool
+    {
+        $stmt = $this->db->prepare("INSERT INTO book (title, description, image, user_id) VALUES (:title, :description, :image, :user_id)");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':image', $imagePath);
+        $stmt->bindParam(':user_id', $userId);  // Lier le livre à l'utilisateur
+        return $stmt->execute();
+    }
+
+
 }

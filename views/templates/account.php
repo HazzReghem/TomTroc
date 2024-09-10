@@ -73,7 +73,7 @@
             </thead>
             <tbody>
                 <?php foreach ($userBooks as $userBook) { ?>
-                    <tr>
+                    <tr class="tableCell">
                         <td>
                         <?php 
                             $imagePath = "css/assets/" . $userBook['image'];
@@ -82,8 +82,14 @@
                         </td>
                         <td><?= htmlspecialchars($userBook['title']) ?></td>
                         <td><?= htmlspecialchars($userBook['author']) ?></td>
-                        <td><?= htmlspecialchars($userBook['description']) ?></td>
-                        <td><?= htmlspecialchars($userBook['availability_status']) ?></td>
+                        <td><p><?= htmlspecialchars($userBook['description']) ?></p></td>
+                        <td >
+                            <?php if ($userBook['availability_status'] !== 'Disponible'): ?>
+                                <span class="availability-banner-no"><?= htmlspecialchars($userBook['availability_status']) ?></span>
+                            <?php elseif ($userBook['availability_status'] == 'Disponible'): ?>
+                                <span class="availability-banner-yes"><?= htmlspecialchars($userBook['availability_status']) ?></span>
+                            <?php endif; ?>
+                        </td>
                         <td><?= htmlspecialchars($userBook['author']) ?></td>
                     </tr>
                 <?php } ?>
