@@ -11,18 +11,18 @@
             <?php
                 $picturePath = "css/user_pic/" . $user['profile_picture'];
                 echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
-            ?>    
-        
-            <!-- <img src="<?= htmlspecialchars($user['profile_picture']) ?>" alt="Photo de profil"> -->
+            ?>
             
             <form action="index.php?action=updateProfilePicture" method="post" enctype="multipart/form-data">
                 
-                <label for="profile_picture">modifier</label>
-                <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
-                
-                <button type="submit">Mettre à jour la photo</button>
+                <label for="profile_picture" class="custom-file-upload">modifier</label>
+                <input type="file" id="profile_picture" name="profile_picture" onchange="this.form.submit()" accept="image/*">
 
             </form>
+
+            <p class="lineTwo">_________________________________________</p>
+
+            <h2><?= htmlspecialchars($user['username']) ?></h2>
         </div>
 
         <!-- Formulaire de mise à jour des informations personnelles -->

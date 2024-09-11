@@ -15,8 +15,7 @@ class BookModel
         $query = $this->db->prepare("
             SELECT book.*, users.username 
             FROM book
-            INNER JOIN user_books ON book.id = user_books.book_id
-            INNER JOIN users ON users.id = user_books.user_id
+            INNER JOIN users ON book.user_id = users.id
             ORDER BY book.date_creation DESC 
             LIMIT :limit
         ");
@@ -31,8 +30,7 @@ class BookModel
         $query = $this->db->prepare("
             SELECT book.*, users.username 
             FROM book
-            INNER JOIN user_books ON book.id = user_books.book_id
-            INNER JOIN users ON users.id = user_books.user_id
+            INNER JOIN users ON book.user_id = users.id
         ");
         $query->execute();
 
@@ -61,7 +59,12 @@ class BookModel
 
     public function getBookDetails(int $id) : array
     {
-        $query = $this->db->prepare("SELECT * FROM book WHERE id = :id");
+        $query = $this->db->prepare("
+        SELECT book.*, users.username, users.email 
+        FROM book
+        INNER JOIN users ON book.user_id = users.id
+        WHERE book.id = :id
+        ");
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
@@ -70,11 +73,12 @@ class BookModel
 
     public function addBook(string $title, string $description, string $imagePath, int $userId): bool
     {
-        $stmt = $this->db->prepare("INSERT INTO book (title, description, image, user_id) VALUES (:title, :description, :image, :user_id)");
+        $stmt = $this->db->prepare("INSERT INTO book (title, author, description, image, user_id) VALUES (:title, :author, :description, :image, :user_id)");
         $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':author', $author);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':image', $imagePath);
-        $stmt->bindParam(':user_id', $userId);  // Lier le livre à l'utilisateur
+        $stmt->bindParam(':user_id', $userId); 
         return $stmt->execute();
     }
 

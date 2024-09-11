@@ -114,13 +114,13 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
             $userId = $_SESSION['user_id'];
 
-            // Traitement du téléchargement du fichier
+           
             $file = $_FILES['profile_picture'];
-            $fileName = uniqid() . "_" . basename($file['name']);  // Nom unique
+            $fileName = uniqid() . "_" . basename($file['name']);  
             $targetDir = "./css/user_pic/";
-            $targetFile = $targetDir . $fileName;  // Chemin complet pour l'upload
+            $targetFile = $targetDir . $fileName;  
 
-            // Déplacer l'image uploadée vers le répertoire cible
+            
             if (move_uploaded_file($file['tmp_name'], $targetFile)) {
                 // Ne sauvegarder que le nom de fichier dans la base de données
                 $this->userModel->updateProfilePicture($userId, $fileName);

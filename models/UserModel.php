@@ -80,28 +80,20 @@ class UserModel
 
     public function getUserBooks(int $userId): array
     {
-        return $this->fetchUserBooks($userId);
+        $query = $this->db->prepare("
+            SELECT * FROM book WHERE user_id = :user_id
+        ");
+        $query->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Méthode privée qui fait le travail réel
-    private function fetchUserBooks(int $userId): array
-    {
-        $stmt = $this->db->prepare("
-            SELECT book.* 
-            FROM book 
-            INNER JOIN user_books ON book.id = user_books.book_id 
-            WHERE user_books.user_id = :user_id
-        ");
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function addBookToUser(int $userId, int $bookId): bool
     {
-        $stmt = $this->db->prepare("INSERT INTO user_books (user_id, book_id) VALUES (:user_id, :book_id)");
+        $stmt = $this->db->prepare("UPDATE book SET user_id = :user_id WHERE id = :book_id");
         $stmt->bindParam(':user_id', $userId);
         $stmt->bindParam(':book_id', $bookId);
         return $stmt->execute();
-    }   
+    } 
 }

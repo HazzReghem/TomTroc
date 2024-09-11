@@ -5,8 +5,10 @@
     <p class="filAriane">Nos livres > <?= htmlspecialchars($book['title']) ?></p>
 
     <div class="bookDetails">
-        <img src="<?= htmlspecialchars($book['image']) ?>" alt="Couverture de <?= htmlspecialchars($book['title']) ?>">
-
+        <?php 
+            $imagePath = "css/assets/" . $book['image'];
+            echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '">';    
+        ?>
         <div class="bookInfo">
             <h1><?= htmlspecialchars($book['title']) ?></h1>
             <p class="writtenBy">par <?= htmlspecialchars($book['author']) ?></p>
@@ -14,7 +16,7 @@
             <h4>description</h4>
             <p class="description"><?= htmlspecialchars($book['description']) ?></p>
             <h4>Propriétaire</h4>
-            <p class="owner">UTILISATEUR</p>
+            <p class="owner"><?= htmlspecialchars($book['username']); ?></p>
             <a href="#" class="submit">Envoyer un message</a>
         </div>
     </div>
