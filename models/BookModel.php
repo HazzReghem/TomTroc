@@ -60,7 +60,7 @@ class BookModel
     public function getBookDetails(int $id) : array
     {
         $query = $this->db->prepare("
-        SELECT book.*, users.username, users.email 
+        SELECT book.*, users.username, users.email, users.profile_picture
         FROM book
         INNER JOIN users ON book.user_id = users.id
         WHERE book.id = :id

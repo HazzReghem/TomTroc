@@ -405,12 +405,27 @@ footer{
     display: flex;
 }
 
-.bookDetails img{
+#bookCover{
     width: 50%;
     object-fit: cover;
     min-width: 50%;
 }
 
+.owner{
+    display: flex;
+}
+
+.owner img{
+    width: 60px;
+    border-radius: 90%;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.owner p{
+    font-size: 14px;
+}
 
 .bookInfo{
     width: 50%;

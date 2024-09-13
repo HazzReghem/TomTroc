@@ -7,7 +7,7 @@
     <div class="bookDetails">
         <?php 
             $imagePath = "css/assets/" . $book['image'];
-            echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '">';    
+            echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '" id="bookCover">';    
         ?>
         <div class="bookInfo">
             <h1><?= htmlspecialchars($book['title']) ?></h1>
@@ -16,8 +16,14 @@
             <h4>description</h4>
             <p class="description"><?= htmlspecialchars($book['description']) ?></p>
             <h4>Propriétaire</h4>
-            <p class="owner"><?= htmlspecialchars($book['username']); ?></p>
-            <a href="#" class="submit">Envoyer un message</a>
+            <div class="owner">
+                <?php
+                    $picturePath = "css/user_pic/" . $book['profile_picture'];
+                    echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
+                ?>
+                <p><?= htmlspecialchars($book['username']); ?></p>
+            </div>
+            <a href="#" class="submit">Envoyer un message</a>            
         </div>
     </div>
 

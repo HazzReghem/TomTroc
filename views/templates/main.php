@@ -34,8 +34,9 @@ $activePage = $activePage ?? '';
             <nav id="nav2">
                 <ul class="userNav">
                     <a href="#"><li><i class="fa-regular fa-comment"></i>Messagerie</li></a>
+                    <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="index.php?action=account" class="<?= $activePage === 'account' ? 'active' : '' ?>"><li><i class="fa-regular fa-user"></i>Mon compte</li></a>
-                    <!-- <a href="#"><li>Connexion</li></a> -->
+                    <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])): ?>
                         <a href="index.php?action=logout">Déconnexion</a>
                     <?php else: ?>
