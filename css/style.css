@@ -548,7 +548,7 @@ footer{
     margin: 45px 155px 100px 150px;
 }
 
-.userPicture img{
+.profilePicture{
     width: 150px;
     border-radius: 90%;
     height: 150px;
@@ -598,6 +598,31 @@ footer{
 
 .userPicture h2{
     font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.dateMember{
+    font-size: 14px;
+    color: #A6A6A6;
+    margin: 0;
+}
+
+.userPicture h4{
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+#libraryIcon{
+    width: 11px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+.userLibrary{
+    display: flex;
+    align-items: center;
 }
 
 .userInfo{

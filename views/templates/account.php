@@ -10,7 +10,7 @@
         <div class="userPicture">    
             <?php
                 $picturePath = "css/user_pic/" . $user['profile_picture'];
-                echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
+                echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';                
             ?>
             
             <form action="index.php?action=updateProfilePicture" method="post" enctype="multipart/form-data">
@@ -23,6 +23,13 @@
             <p class="lineTwo">_________________________________________</p>
 
             <h2><?= htmlspecialchars($user['username']) ?></h2>
+            <p class="dateMember">Membre depuis <?= $timeSinceCreation; ?></p>
+
+            <h4>BIBLIOTHEQUE</h4>
+            <div class="userLibrary">
+                <img src="css/assets/library.svg" alt="logo de livres" id="libraryIcon">
+                <p><?= $bookCount; ?> livre<?= $bookCount > 1 ? 's' : ''; ?></p>
+            </div>
         </div>
 
         <!-- Formulaire de mise à jour des informations personnelles -->

@@ -80,10 +80,17 @@ class UserController
         $user = $this->userModel->getUserById($userId);
         $userBooks = $this->userModel->getUserBooks($userId); 
 
+        // Calcul du temps écoulé depuis l'inscription
+        $timeSinceCreation = $this->getTimeSinceCreation($user['created_at']);
+        // Récupérer le nombre de livres de l'utilisateur
+        $bookCount = $this->userModel->countUserBooks($userId);
+
         $view = new View("Mon compte");
         $view->render("account", [
             'user' => $user,
             'userBooks' => $userBooks,
+            'timeSinceCreation' => $timeSinceCreation,
+            'bookCount' => $bookCount,
             'activePage' => 'account'
         ]);
     }
@@ -128,6 +135,30 @@ class UserController
 
 
             Utils::redirect('account');
+        }
+    }
+
+    public function getTimeSinceCreation(string $createdAt): string
+    {
+        $createdDate = new DateTime($createdAt);
+        $currentDate = new DateTime();
+
+        // Calcul de la différence
+        $interval = $createdDate->diff($currentDate);
+
+        // Formater la différence (années, mois, jours, etc.)
+        if ($interval->y > 0) {
+            return $interval->y . " année" . ($interval->y > 1 ? "s" : "");
+        } elseif ($interval->m > 0) {
+            return $interval->m . " mois";
+        } elseif ($interval->d > 0) {
+            return $interval->d . " jour" . ($interval->d > 1 ? "s" : "");
+        } elseif ($interval->h > 0) {
+            return $interval->h . " heure" . ($interval->h > 1 ? "s" : "");
+        } elseif ($interval->i > 0) {
+            return $interval->i . " minute" . ($interval->i > 1 ? "s" : "");
+        } else {
+            return "moins d'une minute";
         }
     }
 

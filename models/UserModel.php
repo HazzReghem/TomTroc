@@ -96,4 +96,14 @@ class UserModel
         $stmt->bindParam(':book_id', $bookId);
         return $stmt->execute();
     } 
+
+    public function countUserBooks(int $userId): int
+    {
+        $stmt = $this->db->prepare("SELECT COUNT(*) as book_count FROM book WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return (int) $result['book_count'];
+    }
 }
