@@ -82,5 +82,13 @@ class BookModel
         return $stmt->execute();
     }
 
+    public function deleteBook(int $bookId): bool
+    {
+        $stmt = $this->db->prepare("DELETE FROM book WHERE id = :id");
+        $stmt->bindParam(':id', $bookId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+
 
 }

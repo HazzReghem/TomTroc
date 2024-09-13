@@ -97,7 +97,11 @@
                                 <span class="availability-banner-yes"><?= htmlspecialchars($userBook['availability_status']) ?></span>
                             <?php endif; ?>
                         </td>
-                        <td><?= htmlspecialchars($userBook['author']) ?></td>
+                        <td>
+                            <a href="index.php?action=deleteBook&book_id=<?= $userBook['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre de votre bibliothèque ?');" class="delete-button">
+                                Supprimer
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>

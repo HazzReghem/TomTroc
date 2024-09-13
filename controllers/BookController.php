@@ -80,4 +80,17 @@ class BookController
         }
     }
 
+    public function deleteBook(): void
+    {
+        $bookId = isset($_GET['book_id']) ? (int)$_GET['book_id'] : null;
+
+        // Vérifier que l'ID est valide
+        if ($bookId && $this->bookModel->deleteBook($bookId)) {
+            echo "Le livre a été supprimé avec succès.";
+            Utils::redirect('account'); 
+        } else {
+            echo "Erreur lors de la suppression du livre.";
+        }
+    }
+
 }

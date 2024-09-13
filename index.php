@@ -68,6 +68,11 @@ try {
             $userController->updateProfilePicture();
             break;    
             
+        case 'deleteBook':
+            $bookController = new BookController();
+            $bookController->deleteBook();
+            break;
+                
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
         Utils::redirect('home');

@@ -749,7 +749,12 @@ footer{
     text-decoration: underline;
 }
 
-
 .lineTwo{
     color: #A6A6A63B;
+}
+
+.delete-button{
+    color: #CB2D2D;
+    text-decoration: underline;
+    font-size: 12px;
 }
