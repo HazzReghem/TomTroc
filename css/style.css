@@ -758,3 +758,10 @@ footer{
     text-decoration: underline;
     font-size: 12px;
 }
+
+.edit-button{
+    color: black;
+    text-decoration: underline;
+    font-size: 12px;
+    margin-right: 20px;
+}

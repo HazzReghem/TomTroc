@@ -97,10 +97,14 @@
                                 <span class="availability-banner-yes"><?= htmlspecialchars($userBook['availability_status']) ?></span>
                             <?php endif; ?>
                         </td>
-                        <td>
+                        <td>               
+                            
+                            <a href="index.php?action=editBook&book_id=<?= $userBook['id'] ?>"  class="edit-button">Éditer</a>
+
                             <a href="index.php?action=deleteBook&book_id=<?= $userBook['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre de votre bibliothèque ?');" class="delete-button">
                                 Supprimer
                             </a>
+
                         </td>
                     </tr>
                 <?php } ?>

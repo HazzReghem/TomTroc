@@ -57,18 +57,24 @@ class BookModel
 
 
 
-    public function getBookDetails(int $id) : array
+    public function getBookDetails(int $id): array
     {
         $query = $this->db->prepare("
-        SELECT book.*, users.username, users.email, users.profile_picture
-        FROM book
-        INNER JOIN users ON book.user_id = users.id
-        WHERE book.id = :id
+            SELECT book.*, users.username, users.email, users.profile_picture
+            FROM book
+            INNER JOIN users ON book.user_id = users.id
+            WHERE book.id = :id
         ");
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
-
-        return $query->fetch(PDO::FETCH_ASSOC);
+    
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result === false) {
+            return [];
+        }
+    
+        return $result;
     }
 
     public function addBook(string $title, string $description, string $imagePath, int $userId): bool
@@ -89,6 +95,21 @@ class BookModel
         return $stmt->execute();
     }
 
+    public function updateBook(int $bookId, string $title, string $author, string $description, string $availabilityStatus, string $image): bool
+    {
+        $stmt = $this->db->prepare("
+            UPDATE book 
+            SET title = :title, author = :author, description = :description, availability_status = :availability_status, image = :image 
+            WHERE id = :id
+        ");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':availability_status', $availabilityStatus);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':id', $bookId, PDO::PARAM_INT);
 
+        return $stmt->execute();
+    }
 
 }

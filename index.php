@@ -72,6 +72,25 @@ try {
             $bookController = new BookController();
             $bookController->deleteBook();
             break;
+
+        case 'editBook':
+            $bookController = new BookController();
+            $bookId = $_GET['book_id'] ?? 0;  // Récupère l'ID depuis l'URL
+            $bookController->editBook((int)$bookId);
+            break;
+    
+        case 'updateBook':
+            $bookController = new BookController();
+            
+            $bookId = isset($_POST['book_id']) ? (int)$_POST['book_id'] : null;
+        
+            if ($bookId !== null) {
+                $bookController->updateBook($bookId);
+            } else {
+                echo "Erreur : aucun ID de livre spécifié pour la mise à jour.";
+            }
+            break;
+                
                 
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil

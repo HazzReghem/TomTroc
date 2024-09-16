@@ -61,9 +61,7 @@ class BookController
         // Récupération de l'ID du livre depuis l'URL
         $bookId = $_GET['id'] ?? null;
 
-        // Vérification si un ID a bien été passé
         if ($bookId) {
-            // Récupération des détails du livre
             $book = $this->bookModel->getBookDetails((int)$bookId);
             
             if ($book) {
@@ -84,12 +82,54 @@ class BookController
     {
         $bookId = isset($_GET['book_id']) ? (int)$_GET['book_id'] : null;
 
-        // Vérifier que l'ID est valide
         if ($bookId && $this->bookModel->deleteBook($bookId)) {
             echo "Le livre a été supprimé avec succès.";
             Utils::redirect('account'); 
         } else {
             echo "Erreur lors de la suppression du livre.";
+        }
+    }
+
+    public function editBook(int $id): void
+    {
+
+        var_dump($id);
+        $book = $this->bookModel->getBookDetails($id);
+    
+        if ($book) {
+            $view = new View("Modifier le livre");
+            $view->render("editBook", ['book' => $book]);
+        } else {
+            echo "Erreur : Livre non trouvé.";
+        }
+    }
+
+    public function updateBook(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $bookId = (int)$_POST['book_id'];
+            $title = $_POST['title'];
+            $author = $_POST['author'];
+            $description = $_POST['description'];
+            $availabilityStatus = $_POST['availability_status'];
+
+            $photo = $_FILES['image'];
+            $fileName = basename($photo['name']);
+            if ($fileName) {
+                $targetDir = "./css/assets/";
+                $targetFile = $targetDir . uniqid() . "_" . $fileName;
+                move_uploaded_file($photo['tmp_name'], $targetFile);
+            } else {
+                // Si pas de nouvelle photo, conserver l'ancienne
+                $targetFile = $_POST['existing_image'];
+            }
+
+            if ($this->bookModel->updateBook($bookId, $title, $author, $description, $availabilityStatus, $targetFile)) {
+                echo "Le livre a été mis à jour avec succès.";
+                Utils::redirect('account');
+            } else {
+                echo "Erreur lors de la mise à jour du livre.";
+            }
         }
     }
 
