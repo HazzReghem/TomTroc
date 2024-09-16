@@ -765,3 +765,112 @@ footer{
     font-size: 12px;
     margin-right: 20px;
 }
+
+/* ----------- PAGE EDIT ---------- */
+
+#editBook-section{
+    flex-direction: column;
+    align-items: normal;
+}
+
+.editHeader{
+    display: flex;
+    flex-direction: column;
+    margin-left: 150px;
+    margin-top: 40px;
+}
+
+.editHeader .filAriane{
+    margin: 0;
+}
+
+.editHeader a{
+    font-size: 14px;
+}
+
+.editHeader i{
+    font-size: 10px;
+    margin-right: 5px;
+}
+
+.editHeader h2{
+    font-size: 26px;
+}
+
+.editContainer{
+    margin: 0 150px 0 150px;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 56px 50px 90px 50px;
+}
+
+.bookPicture{
+    width: 50%;
+}
+
+.bookPicture p{
+    color:#A6A6A6;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.bookPicture img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.editForm{
+    width: 50%;
+    margin-left: 115px;
+}
+
+.editForm form{
+    display: flex;
+    flex-direction: column;
+}
+
+.editForm label{
+    font-size: 14px;
+    color: #A6A6A6;
+    margin-bottom: 10px;
+}
+
+.editForm input{
+    background-color: #EDF2F6;
+    font-size: 14px;
+    padding: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    outline: none;
+}
+
+.editForm textarea{
+    height: 300px;
+    background-color: #EDF2F6;
+    font-size: 14px;
+    padding: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    outline: none;
+}
+
+.editForm select{
+    background-color: #EDF2F6;
+    font-size: 14px;
+    padding: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    outline: none;
+}
+

@@ -93,12 +93,14 @@ class BookController
     public function editBook(int $id): void
     {
 
-        var_dump($id);
         $book = $this->bookModel->getBookDetails($id);
     
         if ($book) {
             $view = new View("Modifier le livre");
-            $view->render("editBook", ['book' => $book]);
+            $view->render("editBook", [
+                'book' => $book,
+                'activePage' => 'account'
+            ]);
         } else {
             echo "Erreur : Livre non trouvé.";
         }
