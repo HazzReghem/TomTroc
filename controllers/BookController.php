@@ -106,33 +106,49 @@ class BookController
         }
     }
 
-    public function updateBook(): void
+    public function updateBookDetails(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            var_dump($_POST);
             $bookId = (int)$_POST['book_id'];
             $title = $_POST['title'];
             $author = $_POST['author'];
             $description = $_POST['description'];
             $availabilityStatus = $_POST['availability_status'];
-
-            $photo = $_FILES['image'];
-            $fileName = basename($photo['name']);
-            if ($fileName) {
-                $targetDir = "./css/assets/";
-                $targetFile = $targetDir . uniqid() . "_" . $fileName;
-                move_uploaded_file($photo['tmp_name'], $targetFile);
-            } else {
-                // Si pas de nouvelle photo, conserver l'ancienne
-                $targetFile = $_POST['existing_image'];
-            }
-
-            if ($this->bookModel->updateBook($bookId, $title, $author, $description, $availabilityStatus, $targetFile)) {
-                echo "Le livre a été mis à jour avec succès.";
+    
+            if ($this->bookModel->updateBook($bookId, $title, $author, $description, $availabilityStatus)) {
+                echo "Les détails du livre ont été mis à jour avec succès.";
                 Utils::redirect('account');
             } else {
-                echo "Erreur lors de la mise à jour du livre.";
+                echo "Erreur lors de la mise à jour des détails du livre.";
             }
         }
     }
+    
+
+    public function updateBookImage(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            var_dump($_POST); 
+            var_dump($_FILES); 
+            $bookId = (int)$_POST['book_id'];
+    
+            $photo = $_FILES['book_picture'];
+            $fileName = uniqid() . "_" . basename($photo['name']);  
+            $targetDir = "./css/assets/";
+            $targetFile = $targetDir . $fileName;  
+
+            
+            if (move_uploaded_file($photo['tmp_name'], $targetFile)) {
+                // Ne sauvegarder que le nom de fichier dans la base de données
+                $this->bookModel->updateBookImage($bookId, $fileName);
+            }
+
+            Utils::redirect('account');
+        }
+    }
+    
 
 }

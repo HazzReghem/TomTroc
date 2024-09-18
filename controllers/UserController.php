@@ -60,7 +60,7 @@ class UserController
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['email'] = $user['email'];
-                Utils::redirect('home');
+                Utils::redirect('account');
             } else {
                 echo "Nom d'utilisateur ou mot de passe incorrect.";
             }

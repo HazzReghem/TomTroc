@@ -95,21 +95,35 @@ class BookModel
         return $stmt->execute();
     }
 
-    public function updateBook(int $bookId, string $title, string $author, string $description, string $availabilityStatus, string $image): bool
+    public function updateBook(int $bookId, string $title, string $author, string $description, string $availabilityStatus): bool
     {
         $stmt = $this->db->prepare("
             UPDATE book 
-            SET title = :title, author = :author, description = :description, availability_status = :availability_status, image = :image 
+            SET title = :title, author = :author, description = :description, availability_status = :availability_status
             WHERE id = :id
         ");
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':author', $author);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':availability_status', $availabilityStatus);
-        $stmt->bindParam(':image', $image);
         $stmt->bindParam(':id', $bookId, PDO::PARAM_INT);
 
         return $stmt->execute();
+        var_dump($result); 
+        return $result; 
     }
+
+
+    public function updateBookImage(int $bookId, string $image): bool
+    {
+        $stmt = $this->db->prepare("UPDATE book SET image = :image WHERE id = :id");
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':id', $bookId, PDO::PARAM_INT);
+    
+        return $stmt->execute();
+        var_dump($result);
+        return $result;
+    }
+    
 
 }

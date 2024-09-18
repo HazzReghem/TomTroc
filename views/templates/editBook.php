@@ -18,13 +18,20 @@
                 echo '<img src="' . $picturePath . '" alt="Photo de couverture" class="bookPicture">';                
             ?>
 
+            <form action="index.php?action=updateBookImage" method="post" enctype="multipart/form-data">
+    
+                <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['id']) ?>">
+                <label for="book_picture" class="custom-file-upload">Modifier la photo</label>
+                <input type="file" id="book_picture" name="book_picture" onchange="this.form.submit()" accept="image/*">
+
+            </form>
 
         </div>
 
         <div class="editForm">
-            <form action="index.php?action=updateBook" method="post" enctype="multipart/form-data">
+            <form action="index.php?action=updateBookDetails" method="post" enctype="multipart/form-data">
             
-                <input type="hidden" name="book_id" value="<?= $book['id'] ?>">
+                <input type="hidden" name="book_id" value="<?= htmlspecialchars($book['id']) ?>">
 
                 <label for="title">Titre</label>
                 <input type="text" id="title" name="title" value="<?= htmlspecialchars($book['title']) ?>" required>
@@ -40,8 +47,8 @@
 
                 <label for="availability_status">Disponibilité</label>
                 <select id="availability_status" name="availability_status" required>
-                    <option value="disponible" <?= $book['availability_status'] == 'disponible' ? 'selected' : '' ?>>Disponible</option>
-                    <option value="indisponible" <?= $book['availability_status'] == 'indisponible' ? 'selected' : '' ?>>Indisponible</option>
+                    <option value="disponible" <?= $book['availability_status'] == 'Disponible' ? 'selected' : '' ?>>Disponible</option>
+                    <option value="Pas disponible" <?= $book['availability_status'] == 'Pas disponible' ? 'selected' : '' ?>>Pas disponible</option>
                 </select>
 
                 <button type="submit" class="submit">Valider</button>

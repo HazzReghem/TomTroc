@@ -79,13 +79,25 @@ try {
             $bookController->editBook((int)$bookId);
             break;
     
-        case 'updateBook':
+        case 'updateBookDetails':
             $bookController = new BookController();
             
             $bookId = isset($_POST['book_id']) ? (int)$_POST['book_id'] : null;
         
             if ($bookId !== null) {
-                $bookController->updateBook($bookId);
+                $bookController->updateBookDetails($bookId);
+            } else {
+                echo "Erreur : aucun ID de livre spécifié pour la mise à jour.";
+            }
+            break;
+        
+        case 'updateBookImage':
+            $bookController = new BookController();
+            
+            $bookId = isset($_POST['book_id']) ? (int)$_POST['book_id'] : null;
+        
+            if ($bookId !== null) {
+                $bookController->updateBookImage($bookId);
             } else {
                 echo "Erreur : aucun ID de livre spécifié pour la mise à jour.";
             }
