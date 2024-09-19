@@ -21,7 +21,7 @@
                     $picturePath = "css/user_pic/" . $book['profile_picture'];
                     echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
                 ?>
-                <p><?= htmlspecialchars($book['username']); ?></p>
+                <p><a href="index.php?action=userBooks&user_id=<?= $book['user_id'] ?>"><?= htmlspecialchars($book['username']); ?></a></p>
             </div>
             <a href="#" class="submit">Envoyer un message</a>            
         </div>

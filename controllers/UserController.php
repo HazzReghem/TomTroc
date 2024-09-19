@@ -161,6 +161,25 @@ class UserController
             return "moins d'une minute";
         }
     }
+    
+    public function showUserBooks(): void
+    {
+        $userId = $_SESSION['user_id']; 
+        $user = $this->userModel->getUserById($userId);
+        $userBooks = $this->userModel->getUserBooks($userId); 
 
+        // Calcul du temps écoulé depuis l'inscription
+        $timeSinceCreation = $this->getTimeSinceCreation($user['created_at']);
+        // Récupérer le nombre de livres de l'utilisateur
+        $bookCount = $this->userModel->countUserBooks($userId);
 
+        $view = new View("Mon compte");
+        $view->render("userBooks", [
+            'user' => $user,
+            'userBooks' => $userBooks,
+            'timeSinceCreation' => $timeSinceCreation,
+            'bookCount' => $bookCount,
+            'activePage' => 'account'
+        ]);
+    }
 }

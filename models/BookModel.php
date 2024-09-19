@@ -124,6 +124,4 @@ class BookModel
         var_dump($result);
         return $result;
     }
-    
-
 }

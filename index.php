@@ -102,8 +102,12 @@ try {
                 echo "Erreur : aucun ID de livre spécifié pour la mise à jour.";
             }
             break;
-                
-                
+
+        case 'userBooks':
+            $userController = new UserController();
+            $userController->showUserBooks();
+            break;
+                          
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
         Utils::redirect('home');

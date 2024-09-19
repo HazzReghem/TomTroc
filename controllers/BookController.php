@@ -149,6 +149,4 @@ class BookController
             Utils::redirect('account');
         }
     }
-    
-
 }
