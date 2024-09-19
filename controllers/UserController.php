@@ -164,7 +164,13 @@ class UserController
     
     public function showUserBooks(): void
     {
-        $userId = $_SESSION['user_id']; 
+        if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
+            $userId = (int)$_GET['user_id']; 
+        } else {
+            echo "Erreur : utilisateur non spécifié.";
+            return;
+        } 
+        
         $user = $this->userModel->getUserById($userId);
         $userBooks = $this->userModel->getUserBooks($userId); 
 

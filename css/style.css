@@ -904,6 +904,7 @@ footer{
 
 #userBooks-section .userPicture{
     width: 40%;
+    min-height: 530px;
 }
 
 .booksList{
