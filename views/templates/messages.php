@@ -19,7 +19,7 @@
             
                 <?php foreach ($messages as $message): ?>
                     <div class="message">
-                        <p><strong><?= $message['sender_id'] ?>:</strong> <?= $message['message'] ?></p>
+                        <p><strong><?= $message['username'] ?>:</strong> <?= $message['message'] ?></p>
                         <p><?= $message['sent_at'] ?></p>
                     </div>
                 <?php endforeach; ?>

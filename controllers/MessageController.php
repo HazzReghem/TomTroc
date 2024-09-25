@@ -35,7 +35,7 @@ class MessageController {
             'conversations' => $conversations,
             'messages' => $messages,
             'activeConversationId' => $conversationId, 
-            'currentUser' => $currentUser // Passe l'utilisateur courant à la vue
+            'currentUser' => $currentUser 
         ]);
     }
 

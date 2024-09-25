@@ -109,33 +109,17 @@ try {
             $userController->showUserBooks();
             break;
 
-                    case 'showMessages':
-                        $conversationId = $_GET['conversation_id'] ?? 0;
-                        $messageController = new MessageController();
-                        $messageController->showMessages($conversationId);
-                        break;
-                    
-                    case 'sendMessage':
-                        $messageController = new MessageController();
-                        $messageController->sendMessage();
-                        break;
+        case 'showMessages':
+            $conversationId = $_GET['conversation_id'] ?? 0;
+            $messageController = new MessageController();
+            $messageController->showMessages($conversationId);
+            break;
+        
+        case 'sendMessage':
+            $messageController = new MessageController();
+            $messageController->sendMessage();
+            break;
             
-
-                        case 'viewConversation':
-                            $conversationId = $_GET['conversation_id'] ?? 0;
-                            $messageController = new MessageController($db);
-                            $messages = $messageController->viewConversation((int)$conversationId);
-                            include "views/conversation.php";
-                            break;
-                        
-                        case 'sendMessage':
-                            $conversationId = $_GET['conversation_id'] ?? 0;
-                            $content = $_POST['content'] ?? '';
-                            $messageController = new MessageController($db);
-                            $messageController->sendMessage((int)$conversationId, $_SESSION['user_id'], $content);
-                            header("Location: index.php?action=viewConversation&conversation_id=" . $conversationId);
-                            break;
-                        
             
                           
         default:
