@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/config/autoload.php';
+require_once __DIR__ . '/core/Database.php';
 
 
 $action = $_GET['action'] ?? 'home';
@@ -75,7 +76,7 @@ try {
 
         case 'editBook':
             $bookController = new BookController();
-            $bookId = $_GET['book_id'] ?? 0;  // Récupère l'ID depuis l'URL
+            $bookId = $_GET['book_id'] ?? 0; 
             $bookController->editBook((int)$bookId);
             break;
     
@@ -107,6 +108,35 @@ try {
             $userController = new UserController();
             $userController->showUserBooks();
             break;
+
+                    case 'showMessages':
+                        $conversationId = $_GET['conversation_id'] ?? 0;
+                        $messageController = new MessageController();
+                        $messageController->showMessages($conversationId);
+                        break;
+                    
+                    case 'sendMessage':
+                        $messageController = new MessageController();
+                        $messageController->sendMessage();
+                        break;
+            
+
+                        case 'viewConversation':
+                            $conversationId = $_GET['conversation_id'] ?? 0;
+                            $messageController = new MessageController($db);
+                            $messages = $messageController->viewConversation((int)$conversationId);
+                            include "views/conversation.php";
+                            break;
+                        
+                        case 'sendMessage':
+                            $conversationId = $_GET['conversation_id'] ?? 0;
+                            $content = $_POST['content'] ?? '';
+                            $messageController = new MessageController($db);
+                            $messageController->sendMessage((int)$conversationId, $_SESSION['user_id'], $content);
+                            header("Location: index.php?action=viewConversation&conversation_id=" . $conversationId);
+                            break;
+                        
+            
                           
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil

@@ -23,7 +23,7 @@
                 ?>
                 <p><a href="index.php?action=userBooks&user_id=<?= $book['user_id'] ?>"><?= htmlspecialchars($book['username']); ?></a></p>
             </div>
-            <a href="#" class="submit">Envoyer un message</a>            
+            <a href="index.php?action=showMessage" class="submit">Envoyer un message</a>            
         </div>
     </div>
 

@@ -911,3 +911,57 @@ footer{
 .booksList{
     width: 100%;
 }
+
+/* -----------MESSAGERIE----------- */
+
+.messaging-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.conversations-list {
+    width: 50%;
+    background-color: #f1f1f1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.conversation-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+.conversation-item p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.messages-section {
+    width: 80%;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.messages {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
