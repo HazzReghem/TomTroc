@@ -119,9 +119,8 @@ try {
             $messageController = new MessageController();
             $messageController->sendMessage();
             break;
+        
             
-            
-                          
         default:
         // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
         Utils::redirect('home');

@@ -13,14 +13,15 @@ class MessageModel
             SELECT c.id as conversation_id, 
                u.id as participant_id, 
                u.username, 
+               u.profile_picture,
                m.message, 
                m.sent_at
-        FROM conversations c
-        JOIN users u ON (c.user1_id = u.id OR c.user2_id = u.id)
-        LEFT JOIN messages m ON c.id = m.conversation_id
-        WHERE (c.user1_id = :userId OR c.user2_id = :userId)
-        AND u.id != :userId
-        ORDER BY m.sent_at DESC
+            FROM conversations c
+            JOIN users u ON (c.user1_id = u.id OR c.user2_id = u.id)
+            LEFT JOIN messages m ON c.id = m.conversation_id
+            WHERE (c.user1_id = :userId OR c.user2_id = :userId)
+            AND u.id != :userId
+            ORDER BY m.sent_at DESC
         ");
         $stmt->bindParam(':userId', $userId);
         $stmt->execute();
@@ -61,4 +62,5 @@ class MessageModel
         $stmt->execute();
         return $this->db->lastInsertId();
     }
+
 }   

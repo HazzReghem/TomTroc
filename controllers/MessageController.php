@@ -30,12 +30,25 @@ class MessageController {
         // Récupérer les messages de la conversation active
         $messages = $conversationId ? $this->messageModel->getMessages($conversationId) : [];
 
+        // Récupérer les détails des utilisateurs dans la conversation
+        $participants = $this->messageModel->getUserConversations($userId);
+        
+        // Identifier l'autre participant
+        $otherUser = null;
+        foreach ($participants as $participant) {
+            if ($participant['participant_id'] !== $userId) {
+                $otherUser = $participant;
+                break;
+            }
+        }
+
         $view = new View('Messages');
         $view->render('messages', [
             'conversations' => $conversations,
             'messages' => $messages,
             'activeConversationId' => $conversationId, 
-            'currentUser' => $currentUser 
+            'currentUser' => $currentUser,
+            'otherUser' => $otherUser  
         ]);
     }
 

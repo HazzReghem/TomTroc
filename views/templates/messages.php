@@ -4,6 +4,10 @@
             <?php foreach ($conversations as $conversation): ?>
                 <div class="conversation-item">
                     <a href="index.php?action=showMessages&user_id=<?= $conversation['participant_id'] ?>">
+                        <?php
+                        $picturePath = "css/user_pic/" . $conversation['profile_picture'];
+                        echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
+                        ?>
                         <p><?= $conversation['username'] ?></p>
                     </a>
                 </div>
@@ -13,7 +17,11 @@
         
         <div class="messages-section">
             <div class="messages-header">
-            <h2>Conversation avec <?= isset($currentUser) ? htmlspecialchars($currentUser['username']) : 'Utilisateur inconnu' ?></h2>
+                <?php
+                    $picturePath = "css/user_pic/" . $otherUser['profile_picture'];
+                    echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
+                ?>
+                <h2><?= isset($otherUser) ? htmlspecialchars($otherUser['username']) : 'Utilisateur inconnu' ?></h2>
             </div>
             <div class="messages">
             

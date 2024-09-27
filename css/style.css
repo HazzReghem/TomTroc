@@ -951,6 +951,10 @@ footer{
     margin-bottom: 20px;
 }
 
+.messages-header img{
+    width: 15%;
+}
+
 .messages {
     flex-grow: 1;
     overflow-y: auto;
