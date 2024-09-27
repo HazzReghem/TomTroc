@@ -8,26 +8,30 @@ class MessageModel
         $this->db = $db;
     }
 
+    // Récupérer les conversations d'un utilisateur
     public function getUserConversations($userId) {
         $stmt = $this->db->prepare("
             SELECT c.id as conversation_id, 
-               u.id as participant_id, 
-               u.username, 
-               u.profile_picture,
-               m.message, 
-               m.sent_at
+                   u.id as participant_id, 
+                   u.username, 
+                   u.profile_picture,
+                   m.message, 
+                   MAX(m.sent_at) as last_message_time
             FROM conversations c
             JOIN users u ON (c.user1_id = u.id OR c.user2_id = u.id)
             LEFT JOIN messages m ON c.id = m.conversation_id
             WHERE (c.user1_id = :userId OR c.user2_id = :userId)
             AND u.id != :userId
-            ORDER BY m.sent_at DESC
+            GROUP BY c.id, u.id
+            ORDER BY last_message_time DESC
         ");
         $stmt->bindParam(':userId', $userId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
+    // Récupérer les messages dans une conversation
     public function getMessages($conversationId) {
         $stmt = $this->db->prepare("
             SELECT m.id, m.message, m.sender_id, u.username, m.sent_at
@@ -41,6 +45,7 @@ class MessageModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // Envoyer un message
     public function sendMessage($conversationId, $senderId, $message) {
         $stmt = $this->db->prepare("
             INSERT INTO messages (conversation_id, sender_id, message)
@@ -52,6 +57,7 @@ class MessageModel
         return $stmt->execute();
     }
 
+    // Créer une nouvelle conversation
     public function createConversation($user1Id, $user2Id) {
         $stmt = $this->db->prepare("
             INSERT INTO conversations (user1_id, user2_id)
@@ -62,5 +68,4 @@ class MessageModel
         $stmt->execute();
         return $this->db->lastInsertId();
     }
-
-}   
+}
