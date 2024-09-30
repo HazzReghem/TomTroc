@@ -914,6 +914,10 @@ footer{
 
 /* -----------MESSAGERIE----------- */
 
+#messenger-section{
+    margin: 0 150px;
+}
+
 .messaging-container {
     display: flex;
     height: 100vh;
@@ -922,14 +926,26 @@ footer{
 
 .conversations-list {
     width: 50%;
-    background-color: #f1f1f1;
     padding: 10px;
     overflow-y: auto;
 }
 
+.conversations-list h2{
+    font-size: 35px;
+}
+
 .conversation-item {
-    border-bottom: 1px solid #ccc;
     padding: 10px;
+}
+
+.conversation-item img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 
 .conversation-item p {
@@ -940,19 +956,31 @@ footer{
 .messages-section {
     width: 80%;
     padding: 20px;
-    background-color: #fff;
     display: flex;
     flex-direction: column;
 }
 
 .messages-header {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .messages-header img{
-    width: 15%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    object-fit: cover;
+}
+
+.messages-header h2{
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .messages {

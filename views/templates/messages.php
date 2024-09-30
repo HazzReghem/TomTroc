@@ -2,6 +2,7 @@
     <div class="messaging-container">
         <!-- Colonne des conversations -->
         <div class="conversations-list">
+            <h2 id="messenger-title">Messagerie</h2>
             <?php foreach ($conversations as $conversation): ?>
                 <div class="conversation-item">
                     <a href="index.php?action=showMessages&conversation_id=<?= $conversation['conversation_id'] ?>">
