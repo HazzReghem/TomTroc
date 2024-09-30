@@ -35,8 +35,8 @@
             </div>
             <form method="post" action="index.php?action=sendMessage">
                 <input type="hidden" name="conversation_id" value="<?= htmlspecialchars($activeConversationId) ?>">
-                <textarea name="message_content" placeholder="Écrire un message..." required></textarea>
-                <button type="submit">Envoyer</button>
+                <textarea name="message_content" placeholder="Tapez votre message ici" required></textarea>
+                <button type="submit" class="submit">Envoyer</button>
             </form>
         </div>
     </div>

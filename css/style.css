@@ -928,14 +928,21 @@ footer{
     width: 50%;
     padding: 10px;
     overflow-y: auto;
+    background-color: #FAF9F7;
 }
 
 .conversations-list h2{
     font-size: 35px;
+    margin: 55px 140px 30px 35px;
 }
 
 .conversation-item {
-    padding: 10px;
+    padding: 21px 40px 21px 35px;
+    height: 85px;
+}
+
+.conversation-item:nth-child(even){
+    background: #FFFFFF;
 }
 
 .conversation-item img{
@@ -958,6 +965,33 @@ footer{
     padding: 20px;
     display: flex;
     flex-direction: column;
+}
+
+.messages-section form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.messages-section textarea{
+    width: 630px;
+    height: 20px;
+    border: none;
+    outline: none;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 40px;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.messages-section .submit{
+    margin: 0;
+    padding: 15px 35px;
 }
 
 .messages-header {
