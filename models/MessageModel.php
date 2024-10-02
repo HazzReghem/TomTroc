@@ -29,6 +29,21 @@ class MessageModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getOtherUserInConversation($conversationId, $currentUserId) {
+        $stmt = $this->db->prepare("
+            SELECT u.id as user_id, u.username, u.profile_picture
+            FROM users u
+            JOIN conversations c ON (c.user1_id = u.id OR c.user2_id = u.id)
+            WHERE c.id = :conversationId
+            AND u.id != :currentUserId
+        ");
+        $stmt->bindParam(':conversationId', $conversationId);
+        $stmt->bindParam(':currentUserId', $currentUserId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
     
 
     // Récupérer les messages dans une conversation

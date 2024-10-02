@@ -109,7 +109,7 @@ try {
             $userController->showUserBooks();
             break;
 
-        case 'showMessages':
+        case 'messages':
             $conversationId = $_GET['conversation_id'] ?? 0;
             $messageController = new MessageController();
             $messageController->showMessages($conversationId);

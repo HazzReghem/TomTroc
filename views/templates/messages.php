@@ -5,7 +5,7 @@
             <h2 id="messenger-title">Messagerie</h2>
             <?php foreach ($conversations as $conversation): ?>
                 <div class="conversation-item">
-                    <a href="index.php?action=showMessages&conversation_id=<?= $conversation['conversation_id'] ?>">
+                    <a href="index.php?action=messages&conversation_id=<?= $conversation['conversation_id'] ?>">
                         <?php
                         $picturePath = "css/user_pic/" . $conversation['profile_picture'];
                         echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
@@ -27,12 +27,24 @@
             </div>
             <div class="messages">
                 <?php foreach ($messages as $message): ?>
-                    <div class="message">
-                        <p><strong><?= htmlspecialchars($message['username']) ?>:</strong> <?= htmlspecialchars($message['message']) ?></p>
-                        <p><?= htmlspecialchars($message['sent_at']) ?></p>
+                    <div class="message <?= $message['sender_id'] === $currentUser['id'] ? 'message-self' : 'message-other' ?>">
+                        <?php if ($message['sender_id'] !== $currentUser['id']): ?>
+                            <!-- Affiche la photo de profil uniquement pour l'autre utilisateur -->
+                            <img src="css/user_pic/<?= $otherUser['profile_picture'] ?>" alt="Photo de profil" class="message-profile-pic">
+                        <?php endif; ?>
+
+                        <div class="message-info">
+                            <p class="message-date"><?= date('d.m H:i', strtotime($message['sent_at'])) ?></p>
+                            
+                            <div class="message-content">
+                                <p><?= htmlspecialchars($message['message']) ?></p>
+                            </div>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+
+
             <form method="post" action="index.php?action=sendMessage">
                 <input type="hidden" name="conversation_id" value="<?= htmlspecialchars($activeConversationId) ?>">
                 <textarea name="message_content" placeholder="Tapez votre message ici" required></textarea>

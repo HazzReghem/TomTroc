@@ -33,7 +33,9 @@ $activePage = $activePage ?? '';
 
             <nav id="nav2">
                 <ul class="userNav">
-                    <a href="index.php?action=showMessages"><li><i class="fa-regular fa-comment"></i>Messagerie</li></a>
+                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <a href="index.php?action=messages" class="<?= $activePage === 'messages' ? 'active' : '' ?>"><li><i class="fa-regular fa-user"></i>Messagerie</li></a>
+                    <?php endif; ?>
                     <?php if (isset($_SESSION['user_id'])): ?>
                     <a href="index.php?action=account" class="<?= $activePage === 'account' ? 'active' : '' ?>"><li><i class="fa-regular fa-user"></i>Mon compte</li></a>
                     <?php endif; ?>

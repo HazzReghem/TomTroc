@@ -152,7 +152,7 @@ header a:hover{
     padding: 0;
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .userNav .fa-regular{
@@ -987,6 +987,8 @@ footer{
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
+    font-size: 14px;
+    color: #A6A6A6;
 }
 
 .messages-section .submit{
@@ -1009,6 +1011,7 @@ footer{
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     object-fit: cover;
+    margin-right: 15px;
 }
 
 .messages-header h2{
@@ -1018,16 +1021,83 @@ footer{
 }
 
 .messages {
-    flex-grow: 1;
-    overflow-y: auto;
-}
-
-.message {
-    margin-bottom: 15px;
-}
-
-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.message.message-self {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.message.message-self .message-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message.message-self .message-content {
+    background-color: #EDF2F6;
+    padding: 10px;
+    border-radius: 10px;
+    /* max-width: 60%; */
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+.message.message-other {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.message.message-other .message-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.message.message-other .message-content {
+    background-color: #FFFFFF;
+    padding: 10px 18px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+
+.message-profile-pic {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    top: 10px;
+}
+
+.message-content p{
+    font-size: 12px;
+    margin: 0;
+}
+
+.message-date {
+    font-size: 12px;
+    color: #A6A6A6;
+    margin-bottom: 5px;
+}
+
+#messenger-section form {
+    display: flex;
+    gap: 10px;
+    margin-top: 50px;
+}
+
