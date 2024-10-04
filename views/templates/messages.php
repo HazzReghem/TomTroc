@@ -23,7 +23,7 @@
                                         <?= (new DateTime($conversation['sent_at']))->format('H:i') === (new DateTime())->format('H:i') ? (new DateTime($conversation['sent_at']))->format('H:i') : (new DateTime($conversation['sent_at']))->format('d.m') ?>
                                     </p>
                                 </div>
-                                <p class="last-message"><?= substr($conversation['message'], 0, 20) ?>...</p>
+                                <p class="last-message"><?= substr($conversation['message'], 0, 30) ?>...</p>
                             </div>
                         </div>
                     </a>
