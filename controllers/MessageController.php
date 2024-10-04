@@ -39,7 +39,8 @@ class MessageController {
             'messages' => $messages,
             'activeConversationId' => $conversationId, 
             'currentUser' => $currentUser,
-            'otherUser' => $otherUser
+            'otherUser' => $otherUser, 
+            'activePage' => 'messages'
         ]);
     }
 

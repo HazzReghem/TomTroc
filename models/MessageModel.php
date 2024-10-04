@@ -15,20 +15,19 @@ class MessageModel
                    u.id as participant_id, 
                    u.username, 
                    u.profile_picture,
-                   m.message, 
-                   MAX(m.sent_at) as last_message_time
+                   (SELECT m.message FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_at DESC LIMIT 1) as message,
+                   (SELECT m.sent_at FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_at DESC LIMIT 1) as sent_at
             FROM conversations c
             JOIN users u ON (c.user1_id = u.id OR c.user2_id = u.id)
-            LEFT JOIN messages m ON c.id = m.conversation_id
             WHERE (c.user1_id = :userId OR c.user2_id = :userId)
             AND u.id != :userId
-            GROUP BY c.id, u.id
-            ORDER BY last_message_time DESC
+            ORDER BY sent_at DESC
         ");
         $stmt->bindParam(':userId', $userId);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
     public function getOtherUserInConversation($conversationId, $currentUserId) {
         $stmt = $this->db->prepare("

@@ -5,12 +5,27 @@
             <h2 id="messenger-title">Messagerie</h2>
             <?php foreach ($conversations as $conversation): ?>
                 <div class="conversation-item">
-                    <a href="index.php?action=messages&conversation_id=<?= $conversation['conversation_id'] ?>">
-                        <?php
-                        $picturePath = "css/user_pic/" . $conversation['profile_picture'];
-                        echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
-                        ?>
-                        <p><?= htmlspecialchars($conversation['username']) ?></p>
+                    <a href="index.php?action=showMessages&user_id=<?= $conversation['participant_id'] ?>">
+                        <div class="conversation-content">
+                            <!-- Affiche la photo de profil -->
+                            <div class="profile-picture">
+                                <?php
+                                $picturePath = "css/user_pic/" . $conversation['profile_picture'];
+                                echo '<img src="' . $picturePath . '" alt="Photo de profil">';
+                                ?>
+                            </div>
+
+                            <!-- Affiche le pseudo, le dernier message et la date -->
+                            <div class="conversation-text">
+                                <div class="conversation-header">
+                                    <p class="username"><?= $conversation['username'] ?></p>
+                                    <p class="last-message-date">
+                                        <?= (new DateTime($conversation['sent_at']))->format('H:i') === (new DateTime())->format('H:i') ? (new DateTime($conversation['sent_at']))->format('H:i') : (new DateTime($conversation['sent_at']))->format('d.m') ?>
+                                    </p>
+                                </div>
+                                <p class="last-message"><?= substr($conversation['message'], 0, 20) ?>...</p>
+                            </div>
+                        </div>
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -48,6 +63,7 @@
             <form method="post" action="index.php?action=sendMessage">
                 <input type="hidden" name="conversation_id" value="<?= htmlspecialchars($activeConversationId) ?>">
                 <textarea name="message_content" placeholder="Tapez votre message ici" required></textarea>
+                <!-- <div class="text-box" contenteditable="true" placeholder="Tapez votre message ici" oninput="adjustHeight(this)"></div> -->
                 <button type="submit" class="submit">Envoyer</button>
             </form>
         </div>

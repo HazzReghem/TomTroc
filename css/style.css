@@ -920,7 +920,7 @@ footer{
 
 .messaging-container {
     display: flex;
-    height: 100vh;
+    height: 900px;
     width: 100%;
 }
 
@@ -934,6 +934,14 @@ footer{
 .conversations-list h2{
     font-size: 35px;
     margin: 55px 140px 30px 35px;
+}
+
+.conversation-content{
+    display: flex;
+}
+
+.conversation-header{
+    display: flex;
 }
 
 .conversation-item {
@@ -957,7 +965,7 @@ footer{
 
 .conversation-item p {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 12px;
 }
 
 .messages-section {
@@ -990,6 +998,25 @@ footer{
     font-size: 14px;
     color: #A6A6A6;
 }
+
+/* .text-box{
+    width: 630px;
+    height: 20px;
+    border: none;
+    outline: none;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 40px;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    font-size: 14px;
+    color: #A6A6A6;
+    background: white;
+} */
 
 .messages-section .submit{
     margin: 0;
@@ -1024,6 +1051,8 @@ footer{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
+    top: 300px;
 }
 
 .message {
@@ -1099,5 +1128,7 @@ footer{
     display: flex;
     gap: 10px;
     margin-top: 50px;
+    position: relative;
+    top: 300px;
 }
 
