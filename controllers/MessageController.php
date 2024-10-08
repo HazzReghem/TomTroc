@@ -13,29 +13,43 @@ class MessageController {
     public function showMessages($conversationId = null): void
     {
         $userId = $_SESSION['user_id'];
-
+        $otherUserId = $_GET['user_id'] ?? 0; // Récupère l'ID de l'autre utilisateur depuis l'URL
+        
         $currentUser = $this->userModel->getUserById($userId);
         
-        // Récupérer les conversations de l'utilisateur
-        $conversations = $this->messageModel->getUserConversations($userId);
-        
-        // Si aucune conversation n'est sélectionnée, prendre la première par défaut
-        if (!$conversationId && !empty($conversations)) {
-            $conversationId = $conversations[0]['conversation_id'];
-        } else if (!$conversationId) {
-            echo "Aucune conversation disponible.";
-            return; 
+        // Si aucun autre utilisateur n'est spécifié, récupère la première conversation par défaut
+        if ($otherUserId == 0) {
+            $conversations = $this->messageModel->getUserConversations($userId);
+            
+            if (!empty($conversations)) {
+                // Récupère la première conversation par défaut
+                $conversationId = $conversations[0]['conversation_id'];
+                $otherUserId = $conversations[0]['participant_id']; // L'autre utilisateur de la première conversation
+            } else {
+                echo "Aucune conversation disponible.";
+                return;
+            }
+        } else {
+            // Récupère l'ID de la conversation entre l'utilisateur connecté et l'autre utilisateur
+            $conversation = $this->messageModel->getConversationByUserIds($userId, $otherUserId);
+            
+            if ($conversation) {
+                $conversationId = $conversation['id'];
+            } else {
+                echo "Aucune conversation disponible.";
+                return;
+            }
         }
-        
+    
         // Récupérer les messages de la conversation active
-        $messages = $conversationId ? $this->messageModel->getMessages($conversationId) : [];
-
+        $messages = $this->messageModel->getMessages($conversationId);
+        
         // Identifier l'autre participant dans la conversation active
-        $otherUser = $this->messageModel->getOtherUserInConversation($conversationId, $userId);
+        $otherUser = $this->userModel->getUserById($otherUserId); // Récupère les informations de l'autre utilisateur
         
         $view = new View('Messages');
         $view->render('messages', [
-            'conversations' => $conversations,
+            'conversations' => $this->messageModel->getUserConversations($userId), // Liste des conversations
             'messages' => $messages,
             'activeConversationId' => $conversationId, 
             'currentUser' => $currentUser,
@@ -43,6 +57,8 @@ class MessageController {
             'activePage' => 'messages'
         ]);
     }
+    
+    
 
 
     public function sendMessage() {

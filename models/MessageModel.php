@@ -82,4 +82,20 @@ class MessageModel
         $stmt->execute();
         return $this->db->lastInsertId();
     }
+
+    public function getConversationByUserIds($user1Id, $user2Id) {
+        $stmt = $this->db->prepare("
+            SELECT id 
+            FROM conversations
+            WHERE (user1_id = :user1Id AND user2_id = :user2Id) 
+               OR (user1_id = :user2Id AND user2_id = :user1Id)
+            LIMIT 1
+        ");
+        $stmt->bindParam(':user1Id', $user1Id);
+        $stmt->bindParam(':user2Id', $user2Id);
+        $stmt->execute();
+        
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Renvoie la conversation si elle existe
+    }
+    
 }

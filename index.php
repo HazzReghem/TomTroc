@@ -122,10 +122,10 @@ try {
         
             
         default:
-        // Si aucune route ne correspond, afficher une erreur ou rediriger vers la page d'accueil
-        Utils::redirect('home');
-        break;
-        // throw new Exception("La page demandée n'existe pas.");
+        // Si aucune route ne correspond
+            $mainController = new MainController();
+            $mainController->showError(404, "Oops... la page demandée est introuvable.");
+            break;
     }
 } catch (Exception $e) {
     // http_response_code($e->getCode());

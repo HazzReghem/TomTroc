@@ -5,7 +5,7 @@
             <h2 id="messenger-title">Messagerie</h2>
             <?php foreach ($conversations as $conversation): ?>
                 <div class="conversation-item">
-                    <a href="index.php?action=showMessages&user_id=<?= $conversation['participant_id'] ?>">
+                    <a href="index.php?action=messages&user_id=<?= htmlspecialchars($conversation['participant_id']) ?>">
                         <div class="conversation-content">
                             <!-- Affiche la photo de profil -->
                             <div class="profile-picture">
@@ -20,7 +20,11 @@
                                 <div class="conversation-header">
                                     <p class="username"><?= $conversation['username'] ?></p>
                                     <p class="last-message-date">
-                                        <?= (new DateTime($conversation['sent_at']))->format('H:i') === (new DateTime())->format('H:i') ? (new DateTime($conversation['sent_at']))->format('H:i') : (new DateTime($conversation['sent_at']))->format('d.m') ?>
+                                        <?php
+                                        $sentDate = new DateTime($conversation['sent_at']);
+                                        $now = new DateTime();
+                                        echo $sentDate->format('Y-m-d') === $now->format('Y-m-d') ? $sentDate->format('H:i') : $sentDate->format('d.m');
+                                        ?>
                                     </p>
                                 </div>
                                 <p class="last-message"><?= substr($conversation['message'], 0, 30) ?>...</p>

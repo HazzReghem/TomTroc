@@ -1069,8 +1069,8 @@ footer{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: relative;
-    top: 300px;
+    /* position: relative;
+    top: 300px; */
 }
 
 .message {
@@ -1146,7 +1146,21 @@ footer{
     display: flex;
     gap: 10px;
     margin-top: 50px;
-    position: relative;
-    top: 300px;
+    /* position: relative;
+    top: 300px; */
 }
 
+/* ------------- PAGE ERROR 404 --------------- */
+
+.error-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-container h1{
+    color: #00AC66;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    font-size: 60px;
+}

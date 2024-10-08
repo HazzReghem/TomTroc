@@ -19,4 +19,13 @@ class MainController
             'activePage' => 'home'
         ]);
     }
+
+    public function showError($errorCode = 404, $errorMessage = null): void
+    {
+        $view = new View('Erreur');
+        $view->render('error', [
+            'errorCode' => $errorCode,
+            'errorMessage' => $errorMessage ?? 'La page que vous recherchez est introuvable.'
+        ]);
+    }
 }
