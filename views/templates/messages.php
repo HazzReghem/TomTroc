@@ -10,8 +10,17 @@
                             <!-- Affiche la photo de profil -->
                             <div class="profile-picture">
                                 <?php
-                                $picturePath = "css/user_pic/" . $conversation['profile_picture'];
-                                echo '<img src="' . $picturePath . '" alt="Photo de profil">';
+                                    // Chemin par défaut de la photo de profil
+                                    $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+
+                                    // Vérifiez si l'utilisateur a une photo de profil
+                                    if (!empty($conversation['profile_picture'])) {
+                                        $picturePath = "css/user_pic/" . $conversation['profile_picture'];
+                                    } else {
+                                        $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
+                                    }
+
+                                    echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                                 ?>
                             </div>
 
@@ -19,15 +28,20 @@
                             <div class="conversation-text">
                                 <div class="conversation-header">
                                     <p class="username"><?= $conversation['username'] ?></p>
-                                    <p class="last-message-date">
-                                        <?php
-                                        $sentDate = new DateTime($conversation['sent_at']);
-                                        $now = new DateTime();
-                                        echo $sentDate->format('Y-m-d') === $now->format('Y-m-d') ? $sentDate->format('H:i') : $sentDate->format('d.m');
-                                        ?>
-                                    </p>
+                                    <?php if (!empty($conversation['sent_at'])): ?>
+                                        <p class="last-message-date">
+                                            <?php
+                                            $sentDate = new DateTime($conversation['sent_at']);
+                                            $now = new DateTime();
+                                            echo $sentDate->format('Y-m-d') === $now->format('Y-m-d') ? $sentDate->format('H:i') : $sentDate->format('d.m');
+                                            ?>
+                                        </p>
+                                    <?php endif; ?>
                                 </div>
-                                <p class="last-message"><?= substr($conversation['message'], 0, 30) ?>...</p>
+
+                                <?php if (!empty($conversation['message'])): ?>
+                                    <p class="last-message"><?= htmlspecialchars(substr($conversation['message'], 0, 30)) ?>...</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </a>

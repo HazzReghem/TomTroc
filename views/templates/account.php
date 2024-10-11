@@ -9,8 +9,17 @@
         <!-- Formulaire de mise à jour de la photo de profil -->
         <div class="userPicture">    
             <?php
-                $picturePath = "css/user_pic/" . $user['profile_picture'];
-                echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';                
+                // Chemin par défaut de la photo de profil
+                $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+
+                // Vérifiez si l'utilisateur a une photo de profil
+                if (!empty($user['profile_picture'])) {
+                    $picturePath = "css/user_pic/" . $user['profile_picture'];
+                } else {
+                    $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
+                }
+
+                echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
             ?>
             
             <form action="index.php?action=updateProfilePicture" method="post" enctype="multipart/form-data">
