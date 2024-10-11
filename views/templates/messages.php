@@ -53,8 +53,17 @@
         <div class="messages-section">
             <div class="messages-header">
                 <?php
+                // Chemin par défaut de la photo de profil
+                $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+
+                // Vérifiez si l'utilisateur a une photo de profil
+                if (!empty($otherUser['profile_picture'])) {
                     $picturePath = "css/user_pic/" . $otherUser['profile_picture'];
-                    echo '<img src="' . $picturePath . '" alt="Photo de profil">';                
+                } else {
+                    $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
+                }
+
+                echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                 ?>
                 <h2><?= isset($otherUser) ? htmlspecialchars($otherUser['username']) : 'Utilisateur inconnu' ?></h2>
             </div>
