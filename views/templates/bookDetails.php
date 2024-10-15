@@ -32,7 +32,11 @@
             ?>
                 <p><a href="index.php?action=userBooks&user_id=<?= $book['user_id'] ?>"><?= htmlspecialchars($book['username']); ?></a></p>
             </div>
-            <a href="index.php?action=messages&user_id=<?= htmlspecialchars($book['user_id']) ?>" class="submit">Envoyer un message</a>            
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="index.php?action=messages&user_id=<?= htmlspecialchars($book['user_id']) ?>" class="submit">Envoyer un message</a>
+            <?php else: ?>    
+                <a href="index.php?action=login" class="submit">Envoyer un message</a>  
+            <?php endif; ?>
         </div>
     </div>
 

@@ -28,7 +28,12 @@
             <p><?= $bookCount; ?> livre<?= $bookCount > 1 ? 's' : ''; ?></p>
         </div>
 
-        <a href="#" class="submit-bg">Écrire un message</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="index.php?action=messages&user_id=<?= htmlspecialchars($user['id']) ?>" class="submit">Écrire un message</a>
+        <?php else: ?>    
+            <a href="index.php?action=login" class="submit">Écrire un message</a>  
+        <?php endif; ?>
+        <!-- <a href="#" class="submit-bg">Écrire un message</a> -->
     </div>
 
     <div class="booksList">
