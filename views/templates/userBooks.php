@@ -33,7 +33,6 @@
         <?php else: ?>    
             <a href="index.php?action=login" class="submit">Écrire un message</a>  
         <?php endif; ?>
-        <!-- <a href="#" class="submit-bg">Écrire un message</a> -->
     </div>
 
     <div class="booksList">

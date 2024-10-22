@@ -5,7 +5,14 @@ class MessageController {
     private $userModel;
 
     public function __construct() {
-        $db = Database::getConnection();
+        $host = getenv('DB_HOST');
+        $dbname = getenv('DB_NAME');
+        $user = getenv('DB_USER');
+        $pass = getenv('DB_PASS');
+
+        
+        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+        $db = new PDO($dsn, $user, $pass);
         $this->messageModel = new MessageModel($db);
         $this->userModel = new UserModel($db);
     }
