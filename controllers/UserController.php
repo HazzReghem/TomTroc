@@ -3,7 +3,7 @@
 class UserController
 {
     private $db;
-    private $userModel;
+    private $userManager;
 
     public function __construct()
     {
@@ -12,19 +12,16 @@ class UserController
         $user = getenv('DB_USER');
         $pass = getenv('DB_PASS');
 
-        
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
         $this->db = new PDO($dsn, $user, $pass);
 
-        $this->userModel = new UserModel($this->db);
+        $this->userManager = new UserManager($this->db);
     }
 
     public function showRegisterForm(): void
     {
         $view = new View("Inscription");
-        $view->render("register", [
-            'activePage' => 'register'
-        ]);
+        $view->render("register", ['activePage' => 'register']);
     }
 
     public function registerUser(): void
@@ -34,7 +31,7 @@ class UserController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            if ($this->userModel->registerUser($username, $email, $password)) {
+            if ($this->userManager->registerUser($username, $email, $password)) {
                 echo "Inscription réussie ! Vous pouvez maintenant vous connecter.";
                 Utils::redirect('login');
             } else {
@@ -44,16 +41,13 @@ class UserController
                     <a href='index.php?action=register' class='submit'>Retour à la page d'inscription</a>"
                 ]);
             }
-            
         }
     }
 
     public function showLoginForm(): void
     {
         $view = new View("Connexion");
-        $view->render("login", [
-            'activePage' => 'login'
-        ]);
+        $view->render("login", ['activePage' => 'login']);
     }
 
     public function loginUser(): void
@@ -62,11 +56,11 @@ class UserController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            $user = $this->userModel->getUserByEmail($email);
+            $user = $this->userManager->getUserByEmail($email);
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['email'] = $user['email'];
+            if ($user && password_verify($password, $user->getPassword())) {
+                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['email'] = $user->getEmail();
                 Utils::redirect('account');
             } else {
                 echo "Nom d'utilisateur ou mot de passe incorrect.";
@@ -83,14 +77,12 @@ class UserController
 
     public function showAccount(): void
     {
-        $userId = $_SESSION['user_id']; 
-        $user = $this->userModel->getUserById($userId);
-        $userBooks = $this->userModel->getUserBooks($userId); 
+        $userId = $_SESSION['user_id'];
+        $user = $this->userManager->getUserById($userId);
+        $userBooks = $this->userManager->getUserBooks($userId);
 
-        // Calcul du temps écoulé depuis l'inscription
-        $timeSinceCreation = $this->getTimeSinceCreation($user['created_at']);
-        // Récupérer le nombre de livres de l'utilisateur
-        $bookCount = $this->userModel->countUserBooks($userId);
+        $timeSinceCreation = $this->getTimeSinceCreation($user->getCreatedAt());
+        $bookCount = $this->userManager->countUserBooks($userId);
 
         $view = new View("Mon compte");
         $view->render("account", [
@@ -110,12 +102,11 @@ class UserController
             $email = $_POST['email'];
             $newPassword = $_POST['password'];
 
-            // Vérifier si un nouveau mot de passe est fourni
             if (!empty($newPassword)) {
                 $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
-                $this->userModel->updateUserInfo($userId, $email, $username, $hashedPassword);
+                $this->userManager->updateUserInfo($userId, $email, $username, $hashedPassword);
             } else {
-                $this->userModel->updateUserInfo($userId, $email, $username);
+                $this->userManager->updateUserInfo($userId, $email, $username);
             }
 
             echo "Informations mises à jour avec succès.";
@@ -128,18 +119,14 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
             $userId = $_SESSION['user_id'];
 
-           
             $file = $_FILES['profile_picture'];
             $fileName = uniqid() . "_" . basename($file['name']);  
             $targetDir = "./css/user_pic/";
-            $targetFile = $targetDir . $fileName;  
+            $targetFile = $targetDir . $fileName;
 
-            
             if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-                // Ne sauvegarder que le nom de fichier dans la base de données
-                $this->userModel->updateProfilePicture($userId, $fileName);
+                $this->userManager->updateProfilePicture($userId, $fileName);
             }
-
 
             Utils::redirect('account');
         }
@@ -149,42 +136,30 @@ class UserController
     {
         $createdDate = new DateTime($createdAt);
         $currentDate = new DateTime();
-
-        // Calcul de la différence
         $interval = $createdDate->diff($currentDate);
 
-        // Formater la différence (années, mois, jours, etc.)
-        if ($interval->y > 0) {
-            return $interval->y . " année" . ($interval->y > 1 ? "s" : "");
-        } elseif ($interval->m > 0) {
-            return $interval->m . " mois";
-        } elseif ($interval->d > 0) {
-            return $interval->d . " jour" . ($interval->d > 1 ? "s" : "");
-        } elseif ($interval->h > 0) {
-            return $interval->h . " heure" . ($interval->h > 1 ? "s" : "");
-        } elseif ($interval->i > 0) {
-            return $interval->i . " minute" . ($interval->i > 1 ? "s" : "");
-        } else {
-            return "moins d'une minute";
-        }
+        if ($interval->y > 0) return $interval->y . " année" . ($interval->y > 1 ? "s" : "");
+        if ($interval->m > 0) return $interval->m . " mois";
+        if ($interval->d > 0) return $interval->d . " jour" . ($interval->d > 1 ? "s" : "");
+        if ($interval->h > 0) return $interval->h . " heure" . ($interval->h > 1 ? "s" : "");
+        if ($interval->i > 0) return $interval->i . " minute" . ($interval->i > 1 ? "s" : "");
+        return "moins d'une minute";
     }
-    
+
     public function showUserBooks(): void
     {
         if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
-            $userId = (int)$_GET['user_id']; 
+            $userId = (int)$_GET['user_id'];
         } else {
             echo "Erreur : utilisateur non spécifié.";
             return;
-        } 
-        
-        $user = $this->userModel->getUserById($userId);
-        $userBooks = $this->userModel->getUserBooks($userId); 
+        }
 
-        // Calcul du temps écoulé depuis l'inscription
-        $timeSinceCreation = $this->getTimeSinceCreation($user['created_at']);
-        // Récupérer le nombre de livres de l'utilisateur
-        $bookCount = $this->userModel->countUserBooks($userId);
+        $user = $this->userManager->getUserById($userId);
+        $userBooks = $this->userManager->getUserBooks($userId);
+
+        $timeSinceCreation = $this->getTimeSinceCreation($user->getCreatedAt());
+        $bookCount = $this->userManager->countUserBooks($userId);
 
         $view = new View("Mon compte");
         $view->render("userBooks", [

@@ -1,8 +1,8 @@
 <?php
 
 class MessageController {
-    private $messageModel;
-    private $userModel;
+    private $messageManager; // Changement de MessageModel à MessageManager
+    private $userManager; // Changement de UserModel à UserManager
 
     public function __construct() {
         $host = getenv('DB_HOST');
@@ -10,11 +10,10 @@ class MessageController {
         $user = getenv('DB_USER');
         $pass = getenv('DB_PASS');
 
-        
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
         $db = new PDO($dsn, $user, $pass);
-        $this->messageModel = new MessageModel($db);
-        $this->userModel = new UserModel($db);
+        $this->messageManager = new MessageManager($db); // Instanciation de MessageManager
+        $this->userManager = new UserManager($db); // Instanciation de UserManager
     }
 
     public function showMessages($conversationId = null): void
@@ -22,11 +21,11 @@ class MessageController {
         $userId = $_SESSION['user_id'];
         $otherUserId = $_GET['user_id'] ?? 0; // Récupère l'ID de l'autre utilisateur depuis l'URL
 
-        $currentUser = $this->userModel->getUserById($userId);
+        $currentUser = $this->userManager->getUserById($userId); // Mise à jour pour utiliser UserManager
 
         // Si aucun autre utilisateur n'est spécifié, récupère la première conversation par défaut
         if ($otherUserId == 0) {
-            $conversations = $this->messageModel->getUserConversations($userId);
+            $conversations = $this->messageManager->getUserConversations($userId);
 
             if (!empty($conversations)) {
                 // Récupère la première conversation par défaut
@@ -38,13 +37,13 @@ class MessageController {
             }
         } else {
             // Récupère l'ID de la conversation entre l'utilisateur connecté et l'autre utilisateur
-            $conversation = $this->messageModel->getConversationByUserIds($userId, $otherUserId);
+            $conversation = $this->messageManager->getConversationByUserIds($userId, $otherUserId);
             
             if ($conversation) {
                 $conversationId = $conversation['id'];
             } else {
                 // Créer une nouvelle conversation
-                $conversationId = $this->messageModel->createConversation($userId, $otherUserId);
+                $conversationId = $this->messageManager->createConversation($userId, $otherUserId);
                 if (!$conversationId) {
                     echo "Erreur lors de la création de la conversation.";
                     return;
@@ -53,14 +52,14 @@ class MessageController {
         }
 
         // Récupérer les messages de la conversation active
-        $messages = $this->messageModel->getMessages($conversationId);
+        $messages = $this->messageManager->getMessages($conversationId);
 
         // Identifier l'autre participant dans la conversation active
-        $otherUser = $this->userModel->getUserById($otherUserId); // Récupère les informations de l'autre utilisateur
+        $otherUser = $this->userManager->getUserById($otherUserId); // Mise à jour pour utiliser UserManager
 
         $view = new View('Messages');
         $view->render('messages', [
-            'conversations' => $this->messageModel->getUserConversations($userId), // Liste des conversations
+            'conversations' => $this->messageManager->getUserConversations($userId), // Liste des conversations
             'messages' => $messages,
             'activeConversationId' => $conversationId, 
             'currentUser' => $currentUser,
@@ -69,19 +68,14 @@ class MessageController {
         ]);
     }
 
-    
-    
-
-
     public function sendMessage() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conversationId = $_POST['conversation_id'];
             $senderId = $_SESSION['user_id'];
             $message = $_POST['message_content'];
 
-            $this->messageModel->sendMessage($conversationId, $senderId, $message);
+            $this->messageManager->sendMessage($conversationId, $senderId, $message);
             header("Location: index.php?action=messages&conversation_id=$conversationId");
         }
     }
 }
-

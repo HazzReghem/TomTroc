@@ -1,4 +1,4 @@
-<section id="messenger-section" arialabelledby="messenger-title">  
+<section id="messenger-section" aria-labelledby="messenger-title">  
     <div class="messaging-container">
         <!-- Colonne des conversations -->
         <div class="conversations-list">
@@ -14,11 +14,7 @@
                                     $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
 
                                     // Vérifiez si l'utilisateur a une photo de profil
-                                    if (!empty($conversation['profile_picture'])) {
-                                        $picturePath = "css/user_pic/" . $conversation['profile_picture'];
-                                    } else {
-                                        $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
-                                    }
+                                    $picturePath = !empty($conversation['profile_picture']) ? "css/user_pic/" . $conversation['profile_picture'] : $defaultPicturePath;
 
                                     echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                                 ?>
@@ -27,7 +23,7 @@
                             <!-- Affiche le pseudo, le dernier message et la date -->
                             <div class="conversation-text">
                                 <div class="conversation-header">
-                                    <p class="username"><?= $conversation['username'] ?></p>
+                                    <p class="username"><?= htmlspecialchars($conversation['username']) ?></p>
                                     <?php if (!empty($conversation['sent_at'])): ?>
                                         <p class="last-message-date">
                                             <?php
@@ -57,22 +53,18 @@
                 $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
 
                 // Vérifiez si l'utilisateur a une photo de profil
-                if (!empty($otherUser['profile_picture'])) {
-                    $picturePath = "css/user_pic/" . $otherUser['profile_picture'];
-                } else {
-                    $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
-                }
+                $picturePath = !empty($otherUser->getProfilePicture()) ? "css/user_pic/" . $otherUser->getProfilePicture() : $defaultPicturePath;
 
                 echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                 ?>
-                <h2><?= isset($otherUser) ? htmlspecialchars($otherUser['username']) : 'Utilisateur inconnu' ?></h2>
+                <h2><?= isset($otherUser) ? htmlspecialchars($otherUser->getUsername()) : 'Utilisateur inconnu' ?></h2>
             </div>
             <div class="messages">
                 <?php foreach ($messages as $message): ?>
-                    <div class="message <?= $message['sender_id'] === $currentUser['id'] ? 'message-self' : 'message-other' ?>">
-                        <?php if ($message['sender_id'] !== $currentUser['id']): ?>
+                    <div class="message <?= $message['sender_id'] === $currentUser->getId() ? 'message-self' : 'message-other' ?>">
+                    <?php if ($message['sender_id'] !== $currentUser->getId()): ?>
                             <!-- Affiche la photo de profil uniquement pour l'autre utilisateur -->
-                            <img src="css/user_pic/<?= $otherUser['profile_picture'] ?>" alt="Photo de profil" class="message-profile-pic">
+                            <img src="css/user_pic/<?= htmlspecialchars($otherUser->getProfilePicture()) ?>" alt="Photo de profil" class="message-profile-pic">
                         <?php endif; ?>
 
                         <div class="message-info">
@@ -86,11 +78,9 @@
                 <?php endforeach; ?>
             </div>
 
-
             <form method="post" action="index.php?action=sendMessage">
                 <input type="hidden" name="conversation_id" value="<?= htmlspecialchars($activeConversationId) ?>">
                 <textarea name="message_content" placeholder="Tapez votre message ici" required></textarea>
-                <!-- <div class="text-box" contenteditable="true" placeholder="Tapez votre message ici" oninput="adjustHeight(this)"></div> -->
                 <button type="submit" class="submit">Envoyer</button>
             </form>
         </div>

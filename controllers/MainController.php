@@ -2,7 +2,7 @@
 
 class MainController
 {
-    private $bookModel;
+    private $bookManager;
 
     public function __construct()
     {
@@ -11,16 +11,16 @@ class MainController
         $user = getenv('DB_USER');
         $pass = getenv('DB_PASS');
 
-        
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
         $db = new PDO($dsn, $user, $pass);
-        
-        $this->bookModel = new BookModel($db);
+
+        // Remplacement de BookModel par BookManager
+        $this->bookManager = new BookManager($db);
     }
 
-    public function showHome() : void
+    public function showHome(): void
     {
-        $lastBooks = $this->bookModel->getLastBooks();
+        $lastBooks = $this->bookManager->getLastBooks();
         $view = new View("Accueil");
         $view->render("home", [
             'lastBooks' => $lastBooks,

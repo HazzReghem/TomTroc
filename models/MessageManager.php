@@ -1,6 +1,6 @@
 <?php
 
-class MessageModel 
+class MessageManager 
 {
     private $db;
 
@@ -12,11 +12,11 @@ class MessageModel
     public function getUserConversations($userId) {
         $stmt = $this->db->prepare("
             SELECT c.id as conversation_id, 
-                   u.id as participant_id, 
-                   u.username, 
-                   u.profile_picture,
-                   (SELECT m.message FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_at DESC LIMIT 1) as message,
-                   (SELECT m.sent_at FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_at DESC LIMIT 1) as sent_at
+                u.id as participant_id, 
+                u.username, 
+                u.profile_picture,
+                (SELECT m.message FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_at DESC LIMIT 1) as message,
+                (SELECT m.sent_at FROM messages m WHERE m.conversation_id = c.id ORDER BY m.sent_at DESC LIMIT 1) as sent_at
             FROM conversations c
             JOIN users u ON (c.user1_id = u.id OR c.user2_id = u.id)
             WHERE (c.user1_id = :userId OR c.user2_id = :userId)
@@ -27,7 +27,6 @@ class MessageModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
 
     public function getOtherUserInConversation($conversationId, $currentUserId) {
         $stmt = $this->db->prepare("
@@ -42,8 +41,6 @@ class MessageModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
-    
 
     // Récupérer les messages dans une conversation
     public function getMessages($conversationId) {
@@ -88,7 +85,7 @@ class MessageModel
             SELECT id 
             FROM conversations
             WHERE (user1_id = :user1Id AND user2_id = :user2Id) 
-               OR (user1_id = :user2Id AND user2_id = :user1Id)
+            OR (user1_id = :user2Id AND user2_id = :user1Id)
             LIMIT 1
         ");
         $stmt->bindParam(':user1Id', $user1Id);
@@ -97,5 +94,4 @@ class MessageModel
         
         return $stmt->fetch(PDO::FETCH_ASSOC); // Renvoie la conversation si elle existe
     }
-    
 }
