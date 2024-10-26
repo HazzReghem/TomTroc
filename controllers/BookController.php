@@ -10,11 +10,11 @@ class BookController
 
         $this->bookManager = new BookManager($db);
     }
-
+    
     public function showBooks(): void
     {
-        $titles = $this->bookManager->getAllBookTitles();
         $books = $this->bookManager->getAllBooks();
+        $titles = $this->bookManager->getAllBookTitles();
 
         $view = new View("Nos livres à l'échange");
         $view->render("books", [
@@ -23,6 +23,8 @@ class BookController
             'activePage' => 'books'
         ]);
     }
+
+
 
     public function searchBooks(): void
     {

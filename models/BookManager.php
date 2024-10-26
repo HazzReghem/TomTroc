@@ -46,14 +46,34 @@ class BookManager
     // Récupérer tous les livres
     public function getAllBooks(): array
     {
-        $stmt = $this->db->prepare("
-            SELECT book.*, users.username 
-            FROM book
+        $stmt = $this->db->query("
+            SELECT book.*, users.username, users.profile_picture  
+            FROM book 
             INNER JOIN users ON book.user_id = users.id
         ");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $booksData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $books = [];
+
+        foreach ($booksData as $data) {
+            // var_dump($data); 
+            $books[] = new Book(
+                $data['id'],
+                $data['title'],
+                $data['author'],
+                $data['description'],
+                $data['image'],
+                $data['user_id'],
+                $data['availability_status'],
+                $data['profile_picture'],
+                $data['username'] 
+            );
+        }
+
+        return $books;
     }
+
+
+
 
     // Recherche de livres par titre
     public function searchBooks(string $query): array
@@ -119,10 +139,10 @@ class BookManager
     }
 
     // Récupérer les détails d'un livre par ID
-    public function getBookDetails(int $id): ?Book
+    public function getBookDetails(int $id): ?array
     {
         $stmt = $this->db->prepare("
-            SELECT book.*, users.username, users.profile_picture
+            SELECT book.*, users.username, users.email, users.profile_picture
             FROM book
             INNER JOIN users ON book.user_id = users.id
             WHERE book.id = :id
@@ -130,24 +150,9 @@ class BookManager
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
     
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if ($result) {
-            return new Book(
-                $result['id'],
-                $result['title'],
-                $result['author'],
-                $result['description'],
-                $result['image'],
-                $result['user_id'], 
-                $result['availability_status'] ?? null,
-                $result['profile_picture'] ?? null,
-                $result['username'] ?? null 
-            );
-        }
-        
-        return null;
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
+
     
 
 
