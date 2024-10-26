@@ -27,7 +27,7 @@
 
                     <article class="bookCard BookCard-library">
                         <?php 
-                            $imagePath = "css/assets/" . $book['image'];
+                            $imagePath = "assets/images/" . $book['image'];
                             echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '">';    
                         ?>
 

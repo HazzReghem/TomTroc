@@ -11,10 +11,10 @@
                             <div class="profile-picture">
                                 <?php
                                     // Chemin par défaut de la photo de profil
-                                    $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+                                    $defaultPicturePath = "assets/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
 
                                     // Vérifiez si l'utilisateur a une photo de profil
-                                    $picturePath = !empty($conversation['profile_picture']) ? "css/user_pic/" . $conversation['profile_picture'] : $defaultPicturePath;
+                                    $picturePath = !empty($conversation['profile_picture']) ? "assets/user_pic/" . $conversation['profile_picture'] : $defaultPicturePath;
 
                                     echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                                 ?>
@@ -50,10 +50,10 @@
             <div class="messages-header">
                 <?php
                 // Chemin par défaut de la photo de profil
-                $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+                $defaultPicturePath = "assets/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
 
                 // Vérifiez si l'utilisateur a une photo de profil
-                $picturePath = !empty($otherUser->getProfilePicture()) ? "css/user_pic/" . $otherUser->getProfilePicture() : $defaultPicturePath;
+                $picturePath = !empty($otherUser->getProfilePicture()) ? "assets/user_pic/" . $otherUser->getProfilePicture() : $defaultPicturePath;
 
                 echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                 ?>
@@ -64,7 +64,7 @@
                     <div class="message <?= $message['sender_id'] === $currentUser->getId() ? 'message-self' : 'message-other' ?>">
                     <?php if ($message['sender_id'] !== $currentUser->getId()): ?>
                             <!-- Affiche la photo de profil uniquement pour l'autre utilisateur -->
-                            <img src="css/user_pic/<?= htmlspecialchars($otherUser->getProfilePicture()) ?>" alt="Photo de profil" class="message-profile-pic">
+                            <img src="assets/user_pic/<?= htmlspecialchars($otherUser->getProfilePicture()) ?>" alt="Photo de profil" class="message-profile-pic">
                         <?php endif; ?>
 
                         <div class="message-info">

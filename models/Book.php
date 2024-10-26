@@ -8,16 +8,20 @@ class Book
     private string $description;
     private string $image;
     private ?int $userId;
-    private ?string $availabilityStatus = null;
+    private ?string $availabilityStatus;
+    private ?string $profilePicture;
+    private ?string $username; 
 
-    
-    public function __construct(int $id, string $title, string $author, string $description, string $availabilityStatus, ?int $userId = null) {
+    public function __construct(int $id, string $title, string $author, string $description, string $image, ?int $userId = null, ?string $availabilityStatus = null, ?string $profilePicture = null, ?string $username = null) {
         $this->id = $id;
         $this->title = $title;
         $this->author = $author;
         $this->description = $description;
+        $this->image = $image;
+        $this->userId = $userId;
         $this->availabilityStatus = $availabilityStatus;
-        $this->userId = $userId; // User ID peut être null
+        $this->profilePicture = $profilePicture;
+        $this->username = $username; 
     }
 
     // GETTERS
@@ -26,8 +30,12 @@ class Book
     public function getAuthor(): string { return $this->author; }
     public function getDescription(): string { return $this->description; }
     public function getImage(): string { return $this->image; }
-    public function getUserId(): int { return $this->userId; }
+    public function getUserId(): ?int { return $this->userId; }
     public function getAvailabilityStatus(): ?string { return $this->availabilityStatus; }
+    public function getProfilePicture(): ?string { return $this->profilePicture; }
+    public function getUsername(): ?string { return $this->username; } 
+
+
 
     // SETTERS
     public function setTitle(string $title): self { $this->title = $title; return $this; }

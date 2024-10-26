@@ -102,10 +102,10 @@ class BookManager
     }
 
     // Récupérer les détails d'un livre par ID
-    public function getBookDetails(int $id): ?array
+    public function getBookDetails(int $id): ?Book
     {
         $stmt = $this->db->prepare("
-            SELECT book.*, users.username, users.email, users.profile_picture
+            SELECT book.*, users.username, users.profile_picture
             FROM book
             INNER JOIN users ON book.user_id = users.id
             WHERE book.id = :id
@@ -114,8 +114,26 @@ class BookManager
         $stmt->execute();
     
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result ?: null;
+        
+        if ($result) {
+            // Créez et retournez un objet Book
+            return new Book(
+                $result['id'],
+                $result['title'],
+                $result['author'],
+                $result['description'],
+                $result['image'],
+                $result['user_id'], // Assurez-vous que user_id est dans le résultat
+                $result['availability_status'] ?? null,
+                $result['profile_picture'] ?? null,
+                $result['username'] ?? null // Ajoutez cette ligne
+            );
+        }
+        
+        return null;
     }
+    
+
 
     // Récupérer tous les titres de livres
     public function getAllBookTitles(): array

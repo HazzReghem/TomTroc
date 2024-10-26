@@ -14,7 +14,7 @@
 
             <p>Photo</p>
             <?php
-                $picturePath = "css/assets/" . $book['image'];
+                $picturePath = "assets/images/" . $book['image'];
                 echo '<img src="' . $picturePath . '" alt="Photo de couverture" class="bookPicture">';                
             ?>
 

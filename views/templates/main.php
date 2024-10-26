@@ -8,7 +8,7 @@ $activePage = $activePage ?? '';
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tom Troc</title>
-        <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="./assets/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@ $activePage = $activePage ?? '';
 <header>
     <div class="headerContainer">
         <div class="headerLogo">
-            <a href="index.php?action=home"><img src="./css/assets/logo_header.png" alt=""></a>
+            <a href="index.php?action=home"><img src="./assets/images/logo_header.png" alt=""></a>
         </div>
 
         <div class="navContainer">
@@ -61,7 +61,7 @@ $activePage = $activePage ?? '';
             <li>Politique de confidentialité</li>
             <li>Mentions légales</li>
             <li>Tom Troc©</li>
-            <li><img src="./css/assets/TT_logo.png" alt="Logo abréviation Tom Troc"></li>
+            <li><img src="./assets/images/TT_logo.png" alt="Logo abréviation Tom Troc"></li>
         </ul>
    </div>
 </footer>

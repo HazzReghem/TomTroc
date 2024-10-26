@@ -1,7 +1,5 @@
 <!-- TEMPLATE DE MON COMPTE -->
 
-<!-- TEMPLATE DE MON COMPTE -->
-
 <section id="account-section" aria-labelledby="account-section-title">
     
     <h1 id="account-section-title">Mon compte</h1>
@@ -11,11 +9,11 @@
         <div class="userPicture">    
             <?php
                 // Chemin par défaut de la photo de profil
-                $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+                $defaultPicturePath = "assets/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
 
                 // Vérifiez si l'utilisateur a une photo de profil
                 if (!empty($user->getProfilePicture())) {
-                    $picturePath = "css/user_pic/" . $user->getProfilePicture();
+                    $picturePath = "assets/user_pic/" . $user->getProfilePicture();
                 } else {
                     $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
                 }
@@ -37,7 +35,7 @@
 
             <h4>BIBLIOTHEQUE</h4>
             <div class="userLibrary">
-                <img src="css/assets/library.svg" alt="logo de livres" id="libraryIcon">
+                <img src="assets/images/library.svg" alt="logo de livres" id="libraryIcon">
                 <p><?= $bookCount; ?> livre<?= $bookCount > 1 ? 's' : ''; ?></p>
             </div>
         </div>
@@ -79,7 +77,7 @@
                     <tr class="tableCell">
                         <td>
                         <?php 
-                            $imagePath = "css/assets/" . $userBook['image'];
+                            $imagePath = "assets/images/" . $userBook['image'];
                             echo '<img src="' . $imagePath . '" alt="' . $userBook['title'] . '">';    
                         ?>
                         </td>

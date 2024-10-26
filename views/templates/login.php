@@ -19,5 +19,5 @@
 
     </div>
 
-    <img src="./css/assets/books.png" alt="Photo de plusieurs livres">
+    <img src="./assets/images/books.png" alt="Photo de plusieurs livres">
 </section>

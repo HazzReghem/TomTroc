@@ -7,7 +7,7 @@
         <a href="index.php?action=books" class="submit">Découvrir</a>
     </div>
     <div class="discoverIllustation">
-        <img src="./css/assets/library.webp" alt="photo d'un homme avec des centaines de libres">
+        <img src="./assets/images/library.webp" alt="photo d'un homme avec des centaines de libres">
         <p>Hamza</p>
     </div>
 </section>
@@ -24,7 +24,7 @@
                 <article class="bookCard">
                     
                     <?php 
-                        $imagePath = "css/assets/" . $book['image'];
+                        $imagePath = "assets/images/" . $book['image'];
                         echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '">';    
                     ?>
                     
@@ -60,7 +60,7 @@
 <section id="values-section" arialabelledby="values-section-title">
     
     <div class="banner">
-        <img src="./css/assets/banner.png" alt="bannière montrant une femme de dos regardant une pile de livre">
+        <img src="./assets/images/banner.png" alt="bannière montrant une femme de dos regardant une pile de livre">
     </div>
     
     <div class="about-us">
@@ -77,6 +77,6 @@
         
     </div>
 
-    <img src="./css/assets/Vector_2.svg" alt="signature en forme de coeur" class="signature">
+    <img src="./assets/images/Vector_2.svg" alt="signature en forme de coeur" class="signature">
 </section>
 
