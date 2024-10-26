@@ -139,7 +139,7 @@ class BookManager
     }
 
     // Récupérer les détails d'un livre par ID
-    public function getBookDetails(int $id): ?array
+    public function getBookDetails(int $id): ?Book
     {
         $stmt = $this->db->prepare("
             SELECT book.*, users.username, users.email, users.profile_picture
@@ -149,9 +149,26 @@ class BookManager
         ");
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-    
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+
+        $bookData = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($bookData) {
+            return new Book(
+                $bookData['id'],
+                $bookData['title'],
+                $bookData['author'],
+                $bookData['description'],
+                $bookData['image'],
+                $bookData['user_id'],
+                $bookData['availability_status'],
+                $bookData['profile_picture'],
+                $bookData['username']
+            );
+        }
+
+        return null;
     }
+
 
     
 
