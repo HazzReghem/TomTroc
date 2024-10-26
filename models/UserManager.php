@@ -87,11 +87,36 @@ class UserManager
 
     public function getUserBooks(int $userId): array
     {
-        $query = $this->db->prepare("SELECT * FROM book WHERE user_id = :user_id");
-        $query->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare("
+            SELECT book.*, users.username, users.profile_picture
+            FROM book
+            LEFT JOIN users ON book.user_id = users.id
+            WHERE book.user_id = :user_id
+        ");
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $booksData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $books = [];
+
+        foreach ($booksData as $data) {
+            $books[] = new Book(
+                $data['id'],
+                $data['title'],
+                $data['author'],
+                $data['description'],
+                $data['image'],
+                $data['user_id'],
+                $data['availability_status'], // Assurez-vous que cette colonne existe
+                $data['profile_picture'],
+                $data['username']
+            );
+        }
+
+        return $books;
     }
+
+
 
     public function addBookToUser(int $userId, int $bookId): bool
     {

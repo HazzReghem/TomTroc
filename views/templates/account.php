@@ -70,32 +70,36 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($userBooks as $userBook) { ?>
+                <?php foreach ($userBooks as $userBook): ?>
                     <tr class="tableCell">
                         <td>
-                        <?php 
-                            $imagePath = "assets/images/" . $userBook['image'];
-                            echo '<img src="' . $imagePath . '" alt="' . $userBook['title'] . '">';    
-                        ?>
+                            <?php 
+                                $imagePath = "assets/images/" . $userBook->getImage(); 
+                                echo '<img src="' . $imagePath . '" alt="' . $userBook->getTitle() . '">';    
+                            ?>
                         </td>
-                        <td><?= htmlspecialchars($userBook['title']) ?></td>
-                        <td><?= htmlspecialchars($userBook['author']) ?></td>
-                        <td><p><?= htmlspecialchars($userBook['description']) ?></p></td>
+                        <td><?= htmlspecialchars($userBook->getTitle()) ?></td>
+                        <td><?= htmlspecialchars($userBook->getAuthor()) ?></td>
+                        <td><p><?= htmlspecialchars($userBook->getDescription()) ?></p></td>
                         <td>
-                            <?php if ($userBook['availability_status'] !== 'Disponible'): ?>
-                                <span class="availability-banner-no"><?= htmlspecialchars($userBook['availability_status']) ?></span>
-                            <?php elseif ($userBook['availability_status'] == 'Disponible'): ?>
-                                <span class="availability-banner-yes"><?= htmlspecialchars($userBook['availability_status']) ?></span>
-                            <?php endif; ?>
+                            <?php 
+                                $availabilityStatus = $userBook->getAvailabilityStatus();
+                                if ($availabilityStatus === 'Disponible') {
+                                    echo '<span class="availability-banner-yes">' . htmlspecialchars($availabilityStatus) . '</span>';
+                                } else {
+                                    echo '<span class="availability-banner-no">' . htmlspecialchars($availabilityStatus ?? 'Statut inconnu') . '</span>';
+                                }
+                            ?>
                         </td>
                         <td>               
-                            <a href="index.php?action=editBook&book_id=<?= $userBook['id'] ?>" class="edit-button">Éditer</a>
-                            <a href="index.php?action=deleteBook&book_id=<?= $userBook['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre de votre bibliothèque ?');" class="delete-button">Supprimer</a>
+                            <a href="index.php?action=editBook&book_id=<?= $userBook->getId() ?>" class="edit-button">Éditer</a>
+                            <a href="index.php?action=deleteBook&book_id=<?= $userBook->getId() ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce livre de votre bibliothèque ?');" class="delete-button">Supprimer</a>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
+
 
 </section>
