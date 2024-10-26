@@ -12,19 +12,36 @@ class BookManager
     }
 
     // Récupérer les 4 derniers livres
-    public function getLastBooks(int $limit = 4): array
+    public function getLastBooks(int $limit): array
     {
         $stmt = $this->db->prepare("
             SELECT book.*, users.username 
-            FROM book
-            INNER JOIN users ON book.user_id = users.id
+            FROM book 
+            INNER JOIN users ON book.user_id = users.id 
             ORDER BY book.date_creation DESC 
             LIMIT :limit
         ");
         $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $books = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $books[] = new Book(
+                $row['id'],
+                $row['title'],
+                $row['author'],
+                $row['description'],
+                $row['image'],
+                $row['user_id'],
+                $row['availability_status'] ?? null,
+                $row['profile_picture'] ?? null,
+                $row['username'] ?? null 
+            );
+        }
+
+        return $books;
     }
+
 
     // Récupérer tous les livres
     public function getAllBooks(): array

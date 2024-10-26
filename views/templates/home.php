@@ -19,25 +19,26 @@
     <div class="lastBooks">
         <?php foreach ($lastBooks as $book): ?>
 
-            <a href="index.php?action=bookDetails&id=<?= htmlspecialchars($book['id']) ?>">
+            <a href="index.php?action=bookDetails&id=<?= htmlspecialchars($book->getId()) ?>">
 
                 <article class="bookCard">
                     
                     <?php 
-                        $imagePath = "assets/images/" . $book['image'];
-                        echo '<img src="' . $imagePath . '" alt="' . $book['title'] . '">';    
+                        $imagePath = "assets/images/" . $book->getImage();
+                        echo '<img src="' . $imagePath . '" alt="' . htmlspecialchars($book->getTitle()) . '">';    
                     ?>
                     
-                    <h3><?= htmlspecialchars($book['title']) ?></h3>
-                    <p><?= htmlspecialchars($book['author']) ?></p>
+                    <h3><?= htmlspecialchars($book->getTitle()) ?></h3>
+                    <p><?= htmlspecialchars($book->getAuthor()) ?></p>
 
-                    <p class="soldBy">Vendu par : <?php echo htmlspecialchars($book['username']); ?></p>
+                    <p class="soldBy">Vendu par : <?= htmlspecialchars($book->getUsername()) ?></p>
                 
                 </article>
             </a>
 
         <?php endforeach; ?>
     </div>
+
 
     <a href="index.php?action=books" class="submit">Voir tous les livres</a>
 </section>

@@ -13,7 +13,7 @@ class MainController
 
     public function showHome(): void
     {
-        $lastBooks = $this->bookManager->getLastBooks();
+        $lastBooks = $this->bookManager->getLastBooks(4);
         $view = new View("Accueil");
         $view->render("home", [
             'lastBooks' => $lastBooks,
