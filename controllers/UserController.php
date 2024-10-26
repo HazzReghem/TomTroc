@@ -7,15 +7,8 @@ class UserController
 
     public function __construct()
     {
-        $host = getenv('DB_HOST');
-        $dbname = getenv('DB_NAME');
-        $user = getenv('DB_USER');
-        $pass = getenv('DB_PASS');
-
-        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
-        $this->db = new PDO($dsn, $user, $pass);
-
-        $this->userManager = new UserManager($this->db);
+        $db = Database::getInstance();
+        $this->userManager = new UserManager($db);
     }
 
     public function showRegisterForm(): void

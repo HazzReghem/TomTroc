@@ -1,21 +1,14 @@
 <?php
 
 class MessageController {
-    private $messageManager; // Changement de MessageModel à MessageManager
-    private $userManager; // Changement de UserModel à UserManager
+    private $messageManager; 
+    private $userManager; 
 
     public function __construct() {
-        $host = getenv('DB_HOST');
-        $dbname = getenv('DB_NAME');
-        $user = getenv('DB_USER');
-        $pass = getenv('DB_PASS');
-
-        $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
-        $db = new PDO($dsn, $user, $pass);
-        $this->messageManager = new MessageManager($db); // Instanciation de MessageManager
-        $this->userManager = new UserManager($db); // Instanciation de UserManager
+        $db = Database::getInstance();
+        $this->messageManager = new MessageManager($db); 
+        $this->userManager = new UserManager($db); 
     }
-
     public function showMessages($conversationId = null): void
     {
         $userId = $_SESSION['user_id'];
