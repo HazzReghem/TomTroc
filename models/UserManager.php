@@ -53,12 +53,12 @@ class UserManager
                 $data['username'],
                 $data['email'],
                 $data['password'],
-                $data['created_at'],  // Assurez-vous que cette colonne existe dans la base de données
+                $data['created_at'],
                 $data['profile_picture']
             );
         }
         
-        return null;  // Si aucun utilisateur trouvé
+        return null;  
     }
 
     public function updateUserInfo(int $userId, string $email, string $username, ?string $newPassword = null): bool

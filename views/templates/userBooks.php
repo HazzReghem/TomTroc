@@ -4,14 +4,12 @@
 
     <div class="userPicture">    
         <?php
-            // Chemin par défaut de la photo de profil
-            $defaultPicturePath = "assets/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+            $defaultPicturePath = "assets/user_pic/default.webp"; 
 
-            // Vérifiez si l'utilisateur a une photo de profil
             if (!empty($user->getProfilePicture())) {
                 $picturePath = "assets/user_pic/" . $user->getProfilePicture();
             } else {
-                $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
+                $picturePath = $defaultPicturePath;
             }
 
             echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';

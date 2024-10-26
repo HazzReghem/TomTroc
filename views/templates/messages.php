@@ -10,10 +10,8 @@
                             <!-- Affiche la photo de profil -->
                             <div class="profile-picture">
                                 <?php
-                                    // Chemin par défaut de la photo de profil
-                                    $defaultPicturePath = "assets/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+                                    $defaultPicturePath = "assets/user_pic/default.webp"; 
 
-                                    // Vérifiez si l'utilisateur a une photo de profil
                                     $picturePath = !empty($conversation['profile_picture']) ? "assets/user_pic/" . $conversation['profile_picture'] : $defaultPicturePath;
 
                                     echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
@@ -49,10 +47,8 @@
         <div class="messages-section">
             <div class="messages-header">
                 <?php
-                // Chemin par défaut de la photo de profil
-                $defaultPicturePath = "assets/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
+                $defaultPicturePath = "assets/user_pic/default.webp"; 
 
-                // Vérifiez si l'utilisateur a une photo de profil
                 $picturePath = !empty($otherUser->getProfilePicture()) ? "assets/user_pic/" . $otherUser->getProfilePicture() : $defaultPicturePath;
 
                 echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';

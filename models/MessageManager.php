@@ -92,6 +92,6 @@ class MessageManager
         $stmt->bindParam(':user2Id', $user2Id);
         $stmt->execute();
         
-        return $stmt->fetch(PDO::FETCH_ASSOC); // Renvoie la conversation si elle existe
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
     }
 }

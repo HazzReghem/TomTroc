@@ -14,7 +14,7 @@ class MessageController {
         $userId = $_SESSION['user_id'];
         $otherUserId = $_GET['user_id'] ?? 0; // Récupère l'ID de l'autre utilisateur depuis l'URL
 
-        $currentUser = $this->userManager->getUserById($userId); // Mise à jour pour utiliser UserManager
+        $currentUser = $this->userManager->getUserById($userId); 
 
         // Si aucun autre utilisateur n'est spécifié, récupère la première conversation par défaut
         if ($otherUserId == 0) {
@@ -48,11 +48,11 @@ class MessageController {
         $messages = $this->messageManager->getMessages($conversationId);
 
         // Identifier l'autre participant dans la conversation active
-        $otherUser = $this->userManager->getUserById($otherUserId); // Mise à jour pour utiliser UserManager
+        $otherUser = $this->userManager->getUserById($otherUserId); 
 
         $view = new View('Messages');
         $view->render('messages', [
-            'conversations' => $this->messageManager->getUserConversations($userId), // Liste des conversations
+            'conversations' => $this->messageManager->getUserConversations($userId), 
             'messages' => $messages,
             'activeConversationId' => $conversationId, 
             'currentUser' => $currentUser,

@@ -116,17 +116,16 @@ class BookManager
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($result) {
-            // Créez et retournez un objet Book
             return new Book(
                 $result['id'],
                 $result['title'],
                 $result['author'],
                 $result['description'],
                 $result['image'],
-                $result['user_id'], // Assurez-vous que user_id est dans le résultat
+                $result['user_id'], 
                 $result['availability_status'] ?? null,
                 $result['profile_picture'] ?? null,
-                $result['username'] ?? null // Ajoutez cette ligne
+                $result['username'] ?? null 
             );
         }
         

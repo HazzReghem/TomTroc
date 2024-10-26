@@ -18,7 +18,7 @@ class Database {
         if (self::$instance === null) {
             self::$instance = new self();
         }
-        return self::$instance->pdo; // Retourne l'instance PDO
+        return self::$instance->pdo; 
     }
 
 
