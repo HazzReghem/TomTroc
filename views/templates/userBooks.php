@@ -8,8 +8,8 @@
             $defaultPicturePath = "css/user_pic/default.webp"; // Assurez-vous que ce chemin est correct
 
             // Vérifiez si l'utilisateur a une photo de profil
-            if (!empty($user['profile_picture'])) {
-                $picturePath = "css/user_pic/" . $user['profile_picture'];
+            if (!empty($user->getProfilePicture())) {
+                $picturePath = "css/user_pic/" . $user->getProfilePicture();
             } else {
                 $picturePath = $defaultPicturePath; // Utilisez la photo par défaut
             }
@@ -19,7 +19,7 @@
 
         <p class="lineTwo">____________________________</p>
 
-        <h2><?= htmlspecialchars($user['username']) ?></h2>
+        <h2><?= htmlspecialchars($user->getUsername()) ?></h2>
         <p class="dateMember">Membre depuis <?= $timeSinceCreation; ?></p>
 
         <h4>BIBLIOTHEQUE</h4>
@@ -29,8 +29,8 @@
         </div>
 
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="index.php?action=messages&user_id=<?= htmlspecialchars($user['id']) ?>" class="submit">Écrire un message</a>
-        <?php else: ?>    
+            <a href="index.php?action=messages&user_id=<?= htmlspecialchars($user->getId()) ?>" class="submit">Écrire un message</a>
+            <?php else: ?>    
             <a href="index.php?action=login" class="submit">Écrire un message</a>  
         <?php endif; ?>
     </div>
