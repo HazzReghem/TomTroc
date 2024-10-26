@@ -6,6 +6,7 @@
         <?php
             $defaultPicturePath = "assets/user_pic/default.webp"; 
 
+            // Affichez la photo de profil de l'utilisateur
             if (!empty($user->getProfilePicture())) {
                 $picturePath = "assets/user_pic/" . $user->getProfilePicture();
             } else {
@@ -28,7 +29,7 @@
 
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="index.php?action=messages&user_id=<?= htmlspecialchars($user->getId()) ?>" class="submit">Écrire un message</a>
-            <?php else: ?>    
+        <?php else: ?>    
             <a href="index.php?action=login" class="submit">Écrire un message</a>  
         <?php endif; ?>
     </div>
@@ -37,33 +38,27 @@
         <table class="tableBooks">
             <thead>
                 <tr>
-                    <th class="tableHead">
-                        PHOTO
-                    </th>
-                    <th class="tableHead">
-                        TITRE
-                    </th>
-                    <th class="tableHead">
-                        AUTEUR
-                    </th>
-                    <th class="tableHead">
-                        DESCRIPTION
-                    </th>
+                    <th class="tableHead">PHOTO</th>
+                    <th class="tableHead">TITRE</th>
+                    <th class="tableHead">AUTEUR</th>
+                    <th class="tableHead">DESCRIPTION</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($userBooks as $userBook) { ?>
+                <?php foreach ($userBooks as $userBook): ?>
                     <tr class="tableCell">
                         <td>
                         <?php 
-                            $imagePath = "assets/images/" . $userBook['image'];
-                            echo '<img src="' . $imagePath . '" alt="' . $userBook['title'] . '">';    
+                            // Affichez la photo du livre
+                            $imagePath = "assets/images/" . $userBook->getImage();
+                            echo '<img src="' . $imagePath . '" alt="' . htmlspecialchars($userBook->getTitle()) . '">';    
                         ?>
                         </td>
-                        <td><?= htmlspecialchars($userBook['title']) ?></td>
-                        <td><?= htmlspecialchars($userBook['author']) ?></td>
-                        <td><p><?= htmlspecialchars($userBook['description']) ?></p></td>
-                <?php } ?>
+                        <td><?= htmlspecialchars($userBook->getTitle()) ?></td>
+                        <td><?= htmlspecialchars($userBook->getAuthor()) ?></td>
+                        <td><p><?= htmlspecialchars($userBook->getDescription()) ?></p></td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
