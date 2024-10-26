@@ -21,12 +21,13 @@ class UserModel
 
         if ($existingUser) {
             return false;  // L'utilisateur existe déjà
-            Utils::redirect('register');
+            
         }
 
         // Hash du mdp avec Bcrypt
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
+        // Insertion de l'utilisateur dans la DB
         $stmt = $this->db->prepare("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);

@@ -40,9 +40,13 @@ class BookModel
 
     // METHODE FORMULAIRE RECHERCHE
     public function searchBooks(string $query) : array
-    {
+    {   
         $query = "%" . $query . "%";
-        $stmt = $this->db->prepare("SELECT * FROM book WHERE title LIKE :query OR author LIKE :query");
+        $stmt = $this->db->prepare("
+            SELECT *, users.username 
+            FROM book 
+            INNER JOIN users ON book.user_id = users.id
+            WHERE title LIKE :query");
         $stmt->bindValue(':query', $query, PDO::PARAM_STR);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -50,7 +54,7 @@ class BookModel
 
     public function getAllBookTitles(): array
     {
-        $query = $this->db->prepare("SELECT title FROM book WHERE availability_status = 'disponible'");
+        $query = $this->db->prepare("SELECT title FROM book");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_COLUMN);
     }

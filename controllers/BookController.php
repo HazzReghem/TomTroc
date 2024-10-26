@@ -32,36 +32,37 @@ class BookController
     }
 
     public function searchBooks() : void
-{
-    $searchTerm = $_GET['search'] ?? '';
+    {
+        $searchTerm = $_GET['search'] ?? '';
 
-    if (!empty($searchTerm)) {
-        // Rechercher les livres qui correspondent au terme de recherche
-        $books = $this->bookModel->searchBooks($searchTerm);
+        if (!empty($searchTerm)) {
+            // Rechercher les livres qui correspondent au terme de recherche
+            $books = $this->bookModel->searchBooks($searchTerm);
 
-        // Si un seul livre correspond, rediriger directement vers la page de détails du livre
-        if (count($books) === 1) {
-            $bookId = $books[0]['id'];
-            header("Location: index.php?action=bookDetails&id=$bookId");
-            exit; 
+            // Si un seul livre correspond, rediriger directement vers la page de détails du livre
+            if (count($books) === 1) {
+                // Récupère le premier et seul ([0]) élément trouvé dans le tableau
+                $bookId = $books[0]['id'];
+                header("Location: index.php?action=bookDetails&id=$bookId");
+                exit; 
+            }
+            
+            // Si plusieurs livres correspondent, on affiche la liste
+            $view = new View("Résultats de la recherche");
+            $view->render("books", [
+                'books' => $books,
+                'activePage' => 'books'
+            ]);
+
+        } else {
+            // Si la recherche est vide, on retourne une liste vide
+            $view = new View("Résultats de la recherche");
+            $view->render("books", [
+                'books' => [],
+                'activePage' => 'books'
+            ]);
         }
-        
-        // Si plusieurs livres correspondent, on affiche la liste
-        $view = new View("Résultats de la recherche");
-        $view->render("books", [
-            'books' => $books,
-            'activePage' => 'books'
-        ]);
-
-    } else {
-        // Si la recherche est vide, on retourne une liste vide
-        $view = new View("Résultats de la recherche");
-        $view->render("books", [
-            'books' => [],
-            'activePage' => 'books'
-        ]);
     }
-}
 
 
     public function showBookDetails() : void
@@ -118,7 +119,6 @@ class BookController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            var_dump($_POST);
             $bookId = (int)$_POST['book_id'];
             $title = $_POST['title'];
             $author = $_POST['author'];

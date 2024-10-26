@@ -75,6 +75,7 @@ try {
 
         case 'editBook':
             $bookController = new BookController();
+            // Récupération ID url pour afficher formulaire
             $bookId = $_GET['book_id'] ?? 0; 
             $bookController->editBook((int)$bookId);
             break;
@@ -82,6 +83,8 @@ try {
         case 'updateBookDetails':
             $bookController = new BookController();
             
+            // Récupération ID depuis les données du formulaire soumis
+            // Opération ternaire "si book_id" est vrai alors convertir sa valeur en entier
             $bookId = isset($_POST['book_id']) ? (int)$_POST['book_id'] : null;
         
             if ($bookId !== null) {
