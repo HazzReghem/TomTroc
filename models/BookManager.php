@@ -168,11 +168,7 @@ class BookManager
 
         return null;
     }
-
-
     
-
-
     // Récupérer tous les titres de livres
     public function getAllBookTitles(): array
     {

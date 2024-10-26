@@ -11,9 +11,7 @@
                             <div class="profile-picture">
                                 <?php
                                     $defaultPicturePath = "assets/user_pic/default.webp"; 
-
                                     $picturePath = !empty($conversation['profile_picture']) ? "assets/user_pic/" . $conversation['profile_picture'] : $defaultPicturePath;
-
                                     echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                                 ?>
                             </div>
@@ -48,9 +46,7 @@
             <div class="messages-header">
                 <?php
                 $defaultPicturePath = "assets/user_pic/default.webp"; 
-
                 $picturePath = !empty($otherUser->getProfilePicture()) ? "assets/user_pic/" . $otherUser->getProfilePicture() : $defaultPicturePath;
-
                 echo '<img src="' . $picturePath . '" alt="Photo de profil" class="profilePicture">';
                 ?>
                 <h2><?= isset($otherUser) ? htmlspecialchars($otherUser->getUsername()) : 'Utilisateur inconnu' ?></h2>
